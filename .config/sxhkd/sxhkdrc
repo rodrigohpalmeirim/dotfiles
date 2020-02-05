@@ -1,0 +1,177 @@
+# Applications
+super + Return
+	stopitsusi
+control + alt + l
+	kblayout
+super + r
+	rofi -modi window,drun,run,ssh -show drun
+super + e
+	$TERMINAL -e ranger
+super + shift + c
+	$TERMINAL -e configmenu
+super + m
+	ddlaunch caprine
+super + u
+	ddspawn $SHELL
+super + i
+	$TERMINAL -e htop
+super + y
+	$TERMINAL -e calcurse
+super + shift + a
+	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
+#super + shift + c
+#	camtoggle
+#super + shift + e
+#	tutorialvids
+super + w
+	webby | xargs -r $BROWSER
+super + shift + w
+	$BROWSER
+super + o
+	opera
+super + b
+	brave
+super + v
+	code
+super + p
+	ddspawn python
+super + n
+	ddspawn nvim
+
+# Clipboard
+control + alt + e
+	printf "rodrigohpalmeirim@hotmail.com" | xclip -selection clipboard
+control + alt + c
+	printf "You think you're smart, don't you?" | xclip -selection clipboard
+
+
+# Functions
+super + grave
+	dmenuunicode
+super + Scroll_Lock
+	killall screenkey || screenkey
+super + Insert
+	showclip
+control + alt + x
+	prompt "Shutdown computer?" "sudo -A shutdown -h now"
+control + alt + r
+	prompt "Reboot computer?" "sudo -A shutdown -r now"
+control + alt + s
+	prompt 'Suspend computer?' 'sudo systemctl suspend'
+super + x
+	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
+XF86Launch1
+	xset dpms force off
+XF86AudioMute
+	lmc mute && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+XF86AudioLowerVolume
+	lmc down 5 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+shift+XF86AudioLowerVolume
+	lmc down 10 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+control+XF86AudioLowerVolume
+	lmc down 1 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+XF86AudioRaiseVolume
+	lmc up 5 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+shift+XF86AudioRaiseVolume
+	lmc up 10 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+control+XF86AudioRaiseVolume
+	lmc up 1 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+XF86AudioNext
+	playerctl next
+XF86AudioPlay
+	playerctl play-pause
+XF86AudioPrev
+	playerctl previous
+XF86AudioStop
+	playerctl toggle
+XF86MonBrightnessDown
+	xbacklight -dec 5
+XF86MonBrightnessUp
+	xbacklight -inc 5
+
+
+# Recording
+# Screenshot entire screen
+Print
+	maim ~/Pictures/Screenshots/pic-full-"$(date '+%y%m%d-%H%M-%S').png"
+# Screenshot selected area
+shift + Print
+	maim -s ~/Pictures/Screenshots/pic-selected-"$(date '+%y%m%d-%H%M-%S').png"
+# Screenshot current window
+super + Print
+	maim -i "$(xdotool getactivewindow)" ~/Pictures/Screenshots/pic-window-"$(date '+%y%m%d-%H%M-%S').png"
+# Screenshot entire screen to clipboard
+control + Print
+	maim | xclip -selection clipboard -t image/png
+# Screenshot selected area
+control + shift + Print
+	maim -s | xclip -selection clipboard -t image/png
+# Screenshot current window
+control + super + Print
+	maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
+# Record audio or video
+alt + Print
+	dmenurecord
+# kill active recording
+alt + Delete
+	dmenurecord kill
+
+# Pause audio
+#super + {_,shift +} p
+#	lmc {toggle,pause}
+# Changes to next/previous tracks
+super + {comma,period}
+	playerctl {prev,next}
+# Restart track
+#super + shift + less
+#	lmc replay
+# Increase volume
+#super + {equal,plus}
+#	lmc up {5,15}
+# Decrease volume
+#super {_,shift +} + minus
+#	lmc down {5,15}
+# Seek foward in song
+#super + {_,shift +} bracketright
+#	playerctl forward {10,120}
+# Seek backward in song
+#super + {_,shift +} bracketleft
+#	playerctl back {10,120}
+
+# Function keys
+# Show readme
+super + F1
+	groff -mom $HOME/.local/share/larbs/readme.mom -Tpdf | zathura -
+# F2 is restart in i3 right now.
+# Change display
+super + F3
+	displayselect
+# Hibernate
+super + F4
+	prompt 'Hibernate computer?' 'sudo systemctl suspend'
+# Restart/rescan wifi/eth networks
+super + F5
+	sudo -A systemctl restart NetworkManager
+# Start torrent daemon/open interface
+super + F6
+	torwrap
+# toggle torrent daemon
+super + F7
+	td-toggle
+# sync email
+super + F8
+	mailsync
+# Mount a USB drive or Android device
+super + F9
+	dmenumount
+# Unmount a USB drive or Android device
+super + F10
+	dmenuumount
+# Search with Duckduckgo
+super + F11
+	ducksearch
+# Network Manager interface
+super + F12
+	$TERMINAL -e sudo -A nmtui
+
+

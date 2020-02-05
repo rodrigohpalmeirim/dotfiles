@@ -1,0 +1,10 @@
+DATA='{
+    "secret":"2.w7cswGjT_iFAYtDViEHWYDQ0QL2L4wWuAA6U1itBclE",
+    "to":"contalolixo@gmail.com",
+    "device":null,
+    "priority":"normal",
+    "payload":"'$@'"
+}'
+
+RESULT=$(curl -s -d "$DATA" -H "Content-Type: application/json" -X POST https://llamalab.com/automate/cloud/message | grep "<h1>" | tail -c +5 | head -c -6)
+echo $RESULT

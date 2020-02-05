@@ -1,0 +1,51 @@
+{
+    "python.jediEnabled": false,
+
+    "code-runner.runInTerminal": true,
+    "code-runner.saveAllFilesBeforeRun": true,
+    "python.pythonPath": "/usr/bin/python3",
+    "window.zoomLevel": 1,
+
+    "workbench.panel.defaultLocation": "right",
+
+    "files.associations": {
+        "*.as": "asm",
+        "*.html": "html"
+    },
+
+    "[asm]": {
+        "editor.insertSpaces": false,
+        "editor.tabSize": 8
+    },
+
+    "code-runner.executorMapByFileExtension": {
+        ".as": "p3as $fullFileName && p3sim $dir$fileNameWithoutExt.exe"
+    },
+
+    "code-runner.executorMap": {
+        "prolog": "cd $dir && prolog $fileName",
+    },
+
+    "editor.snippetSuggestions": "top",
+
+    "code-runner.customCommand": "npm start",
+    "python.formatting.provider": "black",
+    "python.linting.pylintEnabled": true,
+    "terminal.integrated.rendererType": "dom",
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "eq-material-theme-icons-palenight",
+    "code-runner.ignoreSelection": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[markdown]": {},
+    "liveshare.featureSet": "insiders",
+    "C_Cpp.updateChannel": "Insiders",
+    "breadcrumbs.enabled": true,
+    "window.menuBarVisibility": "toggle",
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.suggestSmartCommit": false,
+    "workbench.colorCustomizations": {},
+    "java.configuration.checkProjectSettingsExclusions": false,
+    "explorer.confirmDragAndDrop": false,
+}

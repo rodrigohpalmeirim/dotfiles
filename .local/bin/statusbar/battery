@@ -1,0 +1,55 @@
+#!/bin/sh
+# Give a battery name (e.g. BAT0) as an argument.
+
+CONFIG_PATH="/home/rodrigo/.config/battery-notify-state"
+
+case $BLOCK_BUTTON in
+	1) if [ $(cat $CONFIG_PATH) == "0" ]; then
+		echo 1 > $CONFIG_PATH
+	else
+		echo 0 > $CONFIG_PATH
+	fi ;;
+    3) pgrep -x dunst >/dev/null && notify-send "Battery module" ": discharging
+: not charging
+: stagnant charge
+: charging
+: charged
+: battery very low!
+: notifications disabled
+" ;;
+esac
+
+capacity=$(cat /sys/class/power_supply/"$1"/capacity) || exit
+status=$(cat /sys/class/power_supply/"$1"/status)
+
+if [ "$capacity" -ge 100 ]; then
+	color="#A3BE8C"
+	icon=""
+elif [ "$capacity" -ge 60 ]; then
+	color="#D8DEE9"
+	icon=""
+elif [ "$capacity" -ge 40 ]; then
+	color="#D8DEE9"
+	icon=""
+elif [ "$capacity" -ge 20 ]; then
+	color="#EBCB8B"
+	icon=""
+else
+	color="#BF616A"
+	icon=""
+	# warn=""
+fi
+
+if [ $(cat $CONFIG_PATH) == "1" ]; then
+	if [ $status == "Discharging" -a $capacity -le 40 ] || [ $status == "Charging" -a $capacity -ge 60 ]; then
+		notify-send -u critical -t 6000 "$icon Battery at $capacity%" -h string:x-canonical-private-synchronous:battery
+	fi
+else
+	notificationIcon=" "
+fi
+
+[ -z $warn ] && warn=" "
+
+[ "$status" = "Charging" ] && color="#D8DEE9"
+
+printf "<span color='%s'>%s%s%s%s</span>\n" "$color" "$(echo "$status" | sed -e "s/,//;s/Discharging/$icon/;s/Not Charging//;s/Charging//;s/Unknown//;s/Full//;s/ 0*/ /g;s/ :/ /g")" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" "$notificationIcon"

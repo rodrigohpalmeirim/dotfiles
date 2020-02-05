@@ -1,0 +1,17 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit
+
+program=$1
+shift
+if xwininfo -tree -root | grep "$program";
+then
+	echo "Window detected."
+	i3 "[instance=\"$program\"] scratchpad show"
+else
+	echo "Window not detected... launching."
+	i3 "exec $program $@"
+	#i3 "[instance=\"$program\"] floating enable"
+	#i3 "[instance=\"$program\"] move scratchpad"
+	#i3 "[instance=\"$program\"] scratchpad show"
+fi

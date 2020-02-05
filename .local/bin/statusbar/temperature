@@ -1,0 +1,29 @@
+#!/bin/sh
+
+TEMP="/tmp/temperature"
+
+case $BLOCK_BUTTON in
+	3) notify-send "Temperature module " "\- Shows CPU temperature.
+- Measurement is of a single core." ;;
+esac
+
+temperature=$(sensors | awk '/Core 0/ {print $3}')
+degrees=$(echo $temperature | grep -oE '[+-][0-9]+')
+
+color="#D8DEE9"
+icon=""
+
+if [ "$degrees" -ge 70 ]; then
+	color="#BF616A"
+	if [[ $(cat $TEMP) -ge 70 ]]; then
+		notify-send -u critical "CPU overheating!"
+	fi
+	icon=""
+elif [ "$degrees" -ge 60 ]; then
+	color="#EBCB8B"
+	icon=""
+fi
+
+echo "$degrees" > $TEMP
+
+printf "<span color='%s'>%s%s</span>\n" "$color" "$icon" " $temperature"

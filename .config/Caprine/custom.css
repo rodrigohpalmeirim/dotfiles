@@ -1,0 +1,38 @@
+/*
+This is the custom styles file where you can add anything you want.
+The styles here will be injected into Caprine and will override default styles.
+If you want to disable styles but keep the config, just comment the lines that you don't want to be used.
+
+Here are some dark mode color variables to get you started.
+Edit them to change color scheme of Caprine.
+Press Command/Ctrl+R in Caprine to see your changes.
+*/
+
+:root {
+	--base: #000;
+	--base-ninety: #ECEFF4; /* rgba(255, 255, 255, 0.9); */
+	--base-seventy-five: rgba(255, 255, 255, 0.75);
+	--base-seventy: #D8DEE9; /* rgba(255, 255, 255, 0.7); */
+	--base-fifty: rgba(255, 255, 255, 0.5);
+	--base-fourty: rgba(255, 255, 255, 0.4);
+	--base-thirty: rgba(255, 255, 255, 0.3);
+	--base-twenty: rgba(255, 255, 255, 0.2);
+	--base-five: #2E3440; /* rgba(255, 255, 255, 0.05); */
+	--base-ten: #3B4252;
+	--base-nine: rgba(255, 255, 255, 0.09);
+	--container-color: #2E3440;
+	--container-dark-color: #2E3440;
+	--list-header-color: #2E3440;
+	--blue: #0084ff;
+	--selected-conversation-background: #3B4252; /* linear-gradient(hsla(209, 110%, 45%, 0.9), hsla(209, 110%, 42%, 0.9)); */
+}
+
+/* Hide bar */
+._6-xk {
+	display: none !important;
+}
+
+/* Hide sidebar separation line */
+._7sli {
+	border: none !important;
+}

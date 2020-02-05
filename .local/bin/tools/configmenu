@@ -1,0 +1,21 @@
+declare -A configs=(
+
+[bmfiles]=~/.config/bmfiles
+[bmdirs]=~/.config/bmdirs
+[bash]=~/.bashrc
+[aliases]=~/.config/aliasrc
+[zsh]=~/.zshrc
+[nvim]=~/.config/nvim/init.vim
+[i3]=~/.config/i3/config
+[Xdefaults]=~/.Xdefaults
+[i3blocks]=~/.config/i3blocks/config
+[keyboard shortcuts]=~/.config/sxhkd/sxhkdrc
+[compton]=~/.config/compton.conf
+[rofi]=~/.config/rofi/config.rasi
+[polybar]=~/.config/polybar/config
+
+)
+
+config=$(for config in "${!configs[@]}"; do echo "$config"; done | dmenu -i -p "Select configuration")
+
+[[ ! -z ${configs[$config]} ]] && $EDITOR ${configs[$config]}
