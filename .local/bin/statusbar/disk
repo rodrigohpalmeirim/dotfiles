@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Status bar module for disk space
+# $1 should be drive mountpoint
+
+case $BLOCK_BUTTON in
+#	1) pgrep -x dunst >/dev/null && notify-send "Disk space" "$(df -h --output=target,used,size)" ;;
+	3) pgrep -x dunst >/dev/null && notify-send "Disk module" "\- Shows free hard drive space." ;;
+esac
+
+printf "  %s\n" "$(df -h $1 | awk ' /[0-9]/ {print $4 "iB"}')"
+#printf "  %s\n" "$(df -h "$1" | awk ' /[0-9]/ {print $3 "/" $2}')"

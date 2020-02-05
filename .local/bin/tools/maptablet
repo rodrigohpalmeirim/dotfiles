@@ -1,0 +1,6 @@
+if [ -z $1 ]; then
+	display=$(xrandr --query | awk '/ connected/ {print $1}' | dmenu -i -p "Select display")
+	xsetwacom --set 'Wacom Intuos BT S Pen Pen (0x8980bd86)' MapToOutput $display
+else
+	xsetwacom --set 'Wacom Intuos BT S Pen Pen (0x8980bd86)' MapToOutput $1
+fi
