@@ -4,7 +4,7 @@
 # $1 should be drive mountpoint
 
 case $BLOCK_BUTTON in
-#	1) pgrep -x dunst >/dev/null && notify-send "Disk space" "$(df -h --output=target,used,size)" ;;
+	1) gksu gparted & ;;
 	3) pgrep -x dunst >/dev/null && notify-send "Disk module" "\- Shows free hard drive space." ;;
 esac
 
