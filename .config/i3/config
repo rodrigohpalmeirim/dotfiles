@@ -10,7 +10,7 @@
 exec "echo 1 > ~/.config/battery-notify-state"
 
 exec_always "xrdb ~/.Xdefaults"
-exec_always "xrandr --output HDMI2 --auto --above eDP1"
+exec_always "xrandr --auto --output HDMI2 --above eDP1"
 exec_always "compton -f"
 exec_always "sleep 1 && xwallpaper --zoom ~/.config/wall.png"
 exec_always --no-startup-id python ~/.config/i3/alternating_layouts.py
