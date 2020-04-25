@@ -1,6 +1,8 @@
-st.font: Source Code Pro:pixelsize=16;
 *.font: Source Code Pro:pixelsize=16;
-
 *.alpha: 0.9
 
 #include "/home/rodrigo/.nord"
+
+progbar.color0: #242933
+progbar.color6: nord8
+progbar.color7: nord3

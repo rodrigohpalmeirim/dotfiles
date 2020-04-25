@@ -37,6 +37,18 @@ markup=pango
 #[memory]
 #interval=30
 
+[messenger]
+interval=once
+signal=13
+
+[discord]
+interval=once
+signal=14
+
+[banano]
+interval=600
+command=echo "  $(($(curl https://stats.foldingathome.org/api/donor/35783112 -s | jq -r '.teams[0].wus') - $(curl https://bananominer.com/user_name/53012rdgyaoc -s | jq -r '.payments[0].work_units'))) WUs"
+
 [cpu-utilization]
 #label=
 #label=

@@ -36,3 +36,18 @@ Press Command/Ctrl+R in Caprine to see your changes.
 ._7sli {
 	border: none !important;
 }
+
+/* Hide top bar shadow */
+._673w._6ynl {
+	box-shadow: none;
+}
+
+/* Fix search bar padding */
+._5iwm._6-_b._150g._58ah {
+	padding: 16px;
+}
+
+/* Round conversation corners */
+._5l-3._1ht1._6zk9._1ht2 {
+	border-radius: 5px;
+}

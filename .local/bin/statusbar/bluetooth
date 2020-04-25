@@ -16,13 +16,14 @@ case $BLOCK_BUTTON in
 - Click to show bluetooth manager" ;;
 esac
 
-devices=$(for device in `bluetoothctl devices | awk '{print $2}'`; do bluetoothctl info $device; done | grep -c "Connected: yes")
-if [[ $(bluetoothctl info EC:C5:C0:D3:05:23 | grep "Connected: yes") ]]; then
+if [[ $(bluetoothctl info $(bluetoothctl devices | grep "Designer Keyboard" | awk '{print $2}') | grep "Connected: yes") ]]; then
 	if [[ $(cat $TEMP) -ne "1" ]]; then
-		~/scripts/kb-layout.sh
+		kblayout
 		echo 1 > $TEMP
 	fi
 else
 	echo 0 > $TEMP
 fi
+
+devices=$(for device in `bluetoothctl devices | awk '{print $2}'`; do bluetoothctl info $device; done | grep -c "Connected: yes")
 printf " %s\n" "$devices"

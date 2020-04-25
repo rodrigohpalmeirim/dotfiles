@@ -52,4 +52,6 @@ fi
 
 [ "$status" = "Charging" ] && color="#D8DEE9"
 
-printf "<span color='%s'>%s%s%s%s</span>\n" "$color" "$(echo "$status" | sed -e "s/,//;s/Discharging/$icon/;s/Not Charging//;s/Charging//;s/Unknown//;s/Full//;s/ 0*/ /g;s/ :/ /g")" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" "$notificationIcon"
+rate=$(upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep energy-rate | awk '{print $2 " " $3}')
+
+printf "<span color='%s'>%s%s%s%s%s</span>\n" "$color" "$(echo "$status" | sed -e "s/,//;s/Discharging/$icon/;s/Not Charging//;s/Charging//;s/Unknown//;s/Full//;s/ 0*/ /g;s/ :/ /g")" "$warn" "$(echo "$capacity" | sed -e 's/$/%/')" " ($rate)" "$notificationIcon"
