@@ -8,9 +8,12 @@
 # export TERMINAL="st"
 
 exec "echo 1 > ~/.config/battery-notify-state"
+exec "rm -rf ~/Downloads/Temp/*"
+exec "caprine"
+exec "./discord-revive.sh"
 
 exec_always "xrdb ~/.Xdefaults"
-exec_always "xrandr --auto --output HDMI2 --above eDP1"
+exec_always "[ -z \"$(cat /proc/acpi/button/lid/LID/state | grep closed)\" ] && xrandr --auto --output HDMI2 --above eDP1 || xrandr --output eDP1 --off"
 exec_always "compton -f"
 exec_always "sleep 1 && xwallpaper --zoom ~/.config/wall.png"
 exec_always --no-startup-id python ~/.config/i3/alternating_layouts.py
@@ -24,7 +27,7 @@ set $term --no-startup-id $TERMINAL
 set $mod Mod4
 floating_modifier $mod
 
-font pango:Ubuntu 10
+font pango:Ubuntu 0
 
 # #---Dropdown Windows---# #
 # General dropdown window traits. The order can matter.
@@ -38,7 +41,16 @@ for_window [instance="dropdown_tmuxdd"] border pixel 3
 #for_window [instance="dropdown_*"] move position center
 for_window [instance="caprine"] floating enable
 for_window [instance="caprine"] move scratchpad
-for_window [instance="caprine"] scratchpad show
+
+for_window [instance="discord"] floating enable
+for_window [instance="discord"] move scratchpad
+
+for_window [instance="spotify"] floating enable
+for_window [instance="spotify"] move scratchpad
+
+for_window [title="Zoom Group Chat"] floating enable
+for_window [title="Zoom Group Chat"] resize set 330 500
+for_window [title="Zoom Group Chat"] move position 1590 528
 
 bar {
 	font pango:Font Awesome 5 Free Regular 10

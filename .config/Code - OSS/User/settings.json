@@ -19,7 +19,8 @@
     },
 
     "code-runner.executorMapByFileExtension": {
-        ".as": "p3as $fullFileName && p3sim $dir$fileNameWithoutExt.exe"
+        ".as": "p3as $fullFileName && p3sim $dir$fileNameWithoutExt.exe",
+        ".pde": "processing-java --sketch=$dir --run"
     },
 
     "code-runner.executorMap": {
@@ -48,4 +49,5 @@
     "workbench.colorCustomizations": {},
     "java.configuration.checkProjectSettingsExclusions": false,
     "explorer.confirmDragAndDrop": false,
+    "diffEditor.ignoreTrimWhitespace": false,
 }

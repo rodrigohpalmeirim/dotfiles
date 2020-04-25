@@ -10,7 +10,12 @@ super + e
 super + shift + c
 	$TERMINAL -e configmenu
 super + m
-	ddlaunch caprine
+	ddlaunch caprine && echo 0 > /tmp/messenger_unread_count && pkill -RTMIN+13 i3blocks
+super + d
+	ddlaunch discord && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
+super + s
+	ddlaunch spotify && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
+
 super + u
 	ddspawn $SHELL
 super + i
@@ -57,7 +62,10 @@ control + alt + x
 control + alt + r
 	prompt "Reboot computer?" "sudo -A shutdown -r now"
 control + alt + s
-	prompt 'Suspend computer?' 'sudo systemctl suspend'
+	prompt 'Suspend computer?' 'systemctl suspend'
+control + alt + h
+	prompt 'Hibernate computer?' 'systemctl hibernate'
+
 super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
@@ -65,17 +73,17 @@ XF86Launch1
 XF86AudioMute
 	lmc mute && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
 XF86AudioLowerVolume
-	lmc down 5 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 5%- | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 shift+XF86AudioLowerVolume
-	lmc down 10 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 10%- | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 control+XF86AudioLowerVolume
-	lmc down 1 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 1%- | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 XF86AudioRaiseVolume
-	lmc up 5 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 5%+ | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 shift+XF86AudioRaiseVolume
-	lmc up 10 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 10%+ | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 control+XF86AudioRaiseVolume
-	lmc up 1 && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
+	amixer -D pulse sset Master 1%+ | tail -n 1 | awk -F"[[%]" '{print $2}' | progbar -t 1 -wf 0.3
 XF86AudioNext
 	playerctl next
 XF86AudioPlay

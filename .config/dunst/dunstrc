@@ -111,6 +111,14 @@
 # NOTE: It might be helpful to run dunst -print in a terminal in order
 # to find fitting options for rules.
 
+[caprine]
+	appname = Caprine
+	script = messenger_incunread
+
+[discord]
+	appname = Discord
+	script = discord_incunread
+
 #[espeak]
 #    summary = "*"
 #    script = dunst_espeak.sh
