@@ -1,4 +1,6 @@
-*.font: Source Code Pro:pixelsize=16;
+#*.font: Source Code Pro Medium:pixelsize=16;
+*.font: Mononoki Nerd Font:pixelsize=18;
+
 *.alpha: 0.9
 
 #include "/home/rodrigo/.nord"

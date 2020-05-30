@@ -5,10 +5,10 @@
 	"vibrancy": "none",
 	"zoomFactor": 1.2000000000000002,
 	"lastWindowState": {
-		"x": 521,
+		"x": 531,
 		"y": 281,
-		"width": 861,
-		"height": 560
+		"width": 876,
+		"height": 578
 	},
 	"menuBarMode": false,
 	"showDockIcon": true,
@@ -30,9 +30,10 @@
 	"autoHideMenuBar": true,
 	"notificationsMuted": false,
 	"hardwareAcceleration": true,
-	"quitOnWindowClose": false,
+	"quitOnWindowClose": true,
 	"keepMeSignedIn": true,
 	"autoplayVideos": true,
 	"showPrivateModePrompt": true,
-	"callRingtoneMuted": false
+	"callRingtoneMuted": false,
+	"spellCheckerLanguages": []
 }
