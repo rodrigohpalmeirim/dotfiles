@@ -8,3 +8,7 @@ export PS1="\[$(tput bold)\]\[$(tput setaf 6)\][\[$(tput setaf 4)\]\u\[$(tput se
 [ -f "$HOME/.config/aliasrc" ] && source "$HOME/.config/aliasrc"
 
 ufetch
+export http_proxy=''
+export https_proxy=''
+export ftp_proxy=''
+export socks_proxy=''

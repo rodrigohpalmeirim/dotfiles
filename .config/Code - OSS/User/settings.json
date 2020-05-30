@@ -50,4 +50,6 @@
     "java.configuration.checkProjectSettingsExclusions": false,
     "explorer.confirmDragAndDrop": false,
     "diffEditor.ignoreTrimWhitespace": false,
+    "java.semanticHighlighting.enabled": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
 }

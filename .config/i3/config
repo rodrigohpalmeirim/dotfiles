@@ -50,7 +50,11 @@ for_window [instance="spotify"] move scratchpad
 
 for_window [title="Zoom Group Chat"] floating enable
 for_window [title="Zoom Group Chat"] resize set 330 500
-for_window [title="Zoom Group Chat"] move position 1590 528
+for_window [title="Zoom Group Chat"] move position 1590 580
+
+for_window [title="Android Webcam Server - Brave"] floating enable
+for_window [title="Android Webcam Server - Brave"] sticky enable
+for_window [title="Android Webcam Server - Brave"] resize set 480 260
 
 bar {
 	font pango:Font Awesome 5 Free Regular 10

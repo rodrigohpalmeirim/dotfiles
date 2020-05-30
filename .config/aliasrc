@@ -27,7 +27,9 @@ alias ka="killall" \
 	c="code" \
 	r="source ranger"\
 	f="find . -name"\
-	clip="xclip -selection clipboard"
+	clip="xclip -selection clipboard"\
+	please='sudo $(fc -ln -1)'\
+	dragon="dragon-drag-and-drop"
 
 command -v nvim >/dev/null && alias vim="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
 
