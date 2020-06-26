@@ -6,6 +6,7 @@ sxhkd &	# Bind keys
 setxkbmap -option caps:super -layout pt && killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' &
 # Properties button extra Mod/Escape
 xmodmap -e 'keycode 135 = Super_R' &
+xset s off -dpms &	# Disable screen blanking
 xset r rate 300 50 &	# Speed xrate up
 unclutter &		# Remove mouse when idle
 # compton &		# xcompmgr for transparency

@@ -2,7 +2,7 @@
 super + Return
 	stopitsusi
 control + alt + l
-	kblayout
+	kblayout; xset r rate 300 50
 super + r
 	rofi -modi window,drun,run,ssh -show drun
 super + e
@@ -93,10 +93,9 @@ XF86AudioPrev
 XF86AudioStop
 	playerctl toggle
 XF86MonBrightnessDown
-	xbacklight -dec 5
+	xbacklight -dec 2 & progbar $(($(xbacklight) - 2))
 XF86MonBrightnessUp
-	xbacklight -inc 5
-
+	xbacklight -inc 2 & progbar $(($(xbacklight) + 2))
 
 # Recording
 # Screenshot entire screen

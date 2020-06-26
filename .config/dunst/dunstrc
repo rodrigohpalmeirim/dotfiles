@@ -118,6 +118,10 @@
 [discord]
 	appname = Discord
 	script = discord_incunread
+[brave-ads]
+	appname = Brave
+	summary = "*Lenovo*"
+	format = ""
 
 #[espeak]
 #    summary = "*"

@@ -13,8 +13,8 @@ exec "caprine"
 exec "./discord-revive.sh"
 
 exec_always "xrdb ~/.Xdefaults"
-exec_always "[ -z \"$(cat /proc/acpi/button/lid/LID/state | grep closed)\" ] && xrandr --auto --output HDMI2 --above eDP1 || xrandr --output eDP1 --off"
-exec_always "compton -f"
+exec_always "[ -z \"$(cat /proc/acpi/button/lid/LID/state | grep closed)\" ] && xrandr --output HDMI2 --above eDP1 --auto || xrandr --output eDP1 --off --auto"
+exec_always "compton --corner-radius 10"
 exec_always "sleep 1 && xwallpaper --zoom ~/.config/wall.png"
 exec_always --no-startup-id python ~/.config/i3/alternating_layouts.py
 
@@ -22,7 +22,7 @@ exec_always --no-startup-id python ~/.config/i3/alternating_layouts.py
 for_window [class="^.*"] border pixel 0
 gaps inner 15
 # gaps outer 15
-border_radius 5
+focus_on_window_activation focus
 set $term --no-startup-id $TERMINAL
 set $mod Mod4
 floating_modifier $mod
@@ -46,6 +46,7 @@ for_window [instance="discord"] floating enable
 for_window [instance="discord"] move scratchpad
 
 for_window [instance="spotify"] floating enable
+for_window [instance="spotify"] resize set 1000 700
 for_window [instance="spotify"] move scratchpad
 
 for_window [title="Zoom Group Chat"] floating enable
