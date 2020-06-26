@@ -5,10 +5,10 @@
 	"vibrancy": "none",
 	"zoomFactor": 1.2000000000000002,
 	"lastWindowState": {
-		"x": 531,
-		"y": 281,
-		"width": 876,
-		"height": 578
+		"x": 501,
+		"y": 298,
+		"width": 892,
+		"height": 603
 	},
 	"menuBarMode": false,
 	"showDockIcon": true,
@@ -35,5 +35,7 @@
 	"autoplayVideos": true,
 	"showPrivateModePrompt": true,
 	"callRingtoneMuted": false,
-	"spellCheckerLanguages": []
+	"spellCheckerLanguages": [
+		"pt-PT"
+	]
 }

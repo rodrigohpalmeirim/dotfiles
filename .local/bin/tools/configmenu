@@ -13,6 +13,7 @@ declare -A configs=(
 [compton]=~/.config/compton.conf
 [rofi]=~/.config/rofi/config.rasi
 [polybar]=~/.config/polybar/config
+[ranger]=~/.config/ranger/rc.conf
 
 )
 

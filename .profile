@@ -14,6 +14,7 @@ export REFER="$HOME/Documents/referbib"
 #export SUDO_ASKPASS="$HOME/.local/bin/tools/dmenupass"
 export NOTMUCH_CONFIG="$HOME/.config/notmuch-config"
 export GTK2_RC_FILES="$HOME/.config/gtk-2.0/gtkrc-2.0"
+export TERMINFO="$HOME/.config/terminfo"
 
 # less/man colors
 export LESS=-R
