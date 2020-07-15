@@ -25,8 +25,8 @@ source /usr/share/fzf/completion.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # History in cache directory:
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.cache/zsh/history
 
 echo -ne '\e[5 q' # Use beam shape cursor on startup.

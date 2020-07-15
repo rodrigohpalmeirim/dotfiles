@@ -5,10 +5,10 @@
 	"vibrancy": "none",
 	"zoomFactor": 1.2000000000000002,
 	"lastWindowState": {
-		"x": 501,
-		"y": 298,
-		"width": 892,
-		"height": 603
+		"x": 535,
+		"y": 267,
+		"width": 855,
+		"height": 582
 	},
 	"menuBarMode": false,
 	"showDockIcon": true,
@@ -37,5 +37,6 @@
 	"callRingtoneMuted": false,
 	"spellCheckerLanguages": [
 		"pt-PT"
-	]
+	],
+	"isSpellCheckerEnabled": true
 }

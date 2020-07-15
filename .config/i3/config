@@ -46,7 +46,7 @@ for_window [instance="discord"] floating enable
 for_window [instance="discord"] move scratchpad
 
 for_window [instance="spotify"] floating enable
-for_window [instance="spotify"] resize set 1000 700
+for_window [instance="spotify"] resize set 1100 700
 for_window [instance="spotify"] move scratchpad
 
 for_window [title="Zoom Group Chat"] floating enable
