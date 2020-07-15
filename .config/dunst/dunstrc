@@ -116,7 +116,7 @@
 	script = messenger_incunread
 
 [discord]
-	appname = Discord
+	appname = discord
 	script = discord_incunread
 [brave-ads]
 	appname = Brave
