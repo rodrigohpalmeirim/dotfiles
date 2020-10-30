@@ -1,0 +1,17 @@
+{
+	"changeLog": {
+		"version": "1.1.7"
+	},
+	"changelog": {
+		"currentversion": "1.1.4"
+	},
+	"formats": {
+		"Standard": "$quote $mention "
+	},
+	"settings": {
+		"alwaysCopy": false,
+		"forceZeros": false,
+		"ignoreMentionInDM": true,
+		"quoteOnlySelected": true
+	}
+}

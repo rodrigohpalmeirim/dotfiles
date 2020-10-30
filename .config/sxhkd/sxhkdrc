@@ -20,10 +20,10 @@ super + u
 	ddspawn $SHELL
 super + i
 	$TERMINAL -e htop
-super + y
-	$TERMINAL -e calcurse
+super + a
+	ddspawn calcurse & calcurse-caldav --init=keep-remote
 super + shift + a
-	$TERMINAL -e pulsemixer; pkill -RTMIN+10 i3blocks
+	ddspawn pulsemixer; pkill -RTMIN+10 i3blocks
 #super + shift + c
 #	camtoggle
 #super + shift + e
@@ -43,16 +43,23 @@ super + p
 super + n
 	ddspawn nvim
 
+super + shift + m
+    cat /tmp/current_link |dmenu -c && xdg-open "$(cat /tmp/current_link)"
+
+
 # Clipboard
 control + alt + e
 	printf "rodrigohpalmeirim@hotmail.com" | xclip -selection clipboard
 control + alt + c
 	printf "You think you're smart, don't you?" | xclip -selection clipboard
-
+control + alt + q
+	xclip -out | qr > /tmp/qr.png && sxiv /tmp/qr.png
+control + alt + o
+	ocr
 
 # Functions
 super + grave
-	dmenuunicode
+	rofimoji
 super + Scroll_Lock
 	killall screenkey || screenkey
 super + Insert
@@ -70,6 +77,8 @@ super + x
 	mpc pause; pauseallmpv; i3lock -e -f -c 1d2021; xset dpms force off
 XF86Launch1
 	xset dpms force off
+alt + m
+	togglemute
 XF86AudioMute
 	lmc mute && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
 XF86AudioLowerVolume

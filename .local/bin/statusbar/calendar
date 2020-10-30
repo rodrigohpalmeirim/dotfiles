@@ -3,8 +3,10 @@
 date '+%d %b %Y (%a) '
 
 case $BLOCK_BUTTON in
-	1) ddspawn - "calcurse -D ~/.config/calcurse &" >/dev/null ;;
+	1) ddspawn - "calcurse &" >/dev/null ;;
 	2) pgrep -x dunst >/dev/null && notify-send "Appointments" "$(calcurse -D ~/.config/calcurse -d3)" ;;
 	3) pgrep -x dunst >/dev/null && notify-send "Date module" "\- Left to show calendar
 - Middle click to show upcoming appointments for the next three days via \`calcurse -d3\`" ;;
 esac
+
+calcurse-caldav --init=keep-remote &> /dev/null

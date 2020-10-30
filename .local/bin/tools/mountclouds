@@ -1,2 +1,3 @@
 #!/bin/bash
-rclone --vfs-cache-mode writes mount google-drive-ist: ~/Google\ Drive\ \-\ IST
+rclone --vfs-cache-mode writes mount onedrive-ist: ~/clouds/OneDrive\ IST
+#rclone --vfs-cache-mode writes mount google-drive-ist: ~/Google\ Drive\ \-\ IST

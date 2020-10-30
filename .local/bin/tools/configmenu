@@ -14,6 +14,8 @@ declare -A configs=(
 [rofi]=~/.config/rofi/config.rasi
 [polybar]=~/.config/polybar/config
 [ranger]=~/.config/ranger/rc.conf
+[dunst]=~/.config/dunst/dunstrc
+[newsboat urls]=~/.config/newsboat/urls
 
 )
 
