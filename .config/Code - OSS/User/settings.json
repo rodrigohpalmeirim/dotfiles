@@ -52,4 +52,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "java.semanticHighlighting.enabled": true,
     "javascript.updateImportsOnFileMove.enabled": "always",
+    "python.languageServer": "Microsoft",
+    "materialTheme.accent": "Remove accents",
 }

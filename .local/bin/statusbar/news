@@ -5,13 +5,15 @@
 # When clicked, brings up `newsboat`.
 
 case $BLOCK_BUTTON in
-        1) setsid "$TERMINAL" -e newsboat ;;
-	2) setsid newsup >/dev/null & exit ;;
-        3) pgrep -x dunst >/dev/null && notify-send "📰 News module" "\- Shows unread news items
-- Shows 🔃 if updating with \`newsup\`
+        1) setsid "$TERMINAL" -e newsboat; pkill -RTMIN+6 i3blocks ;;
+        3) pgrep -x dunst >/dev/null && notify-send "  News module" "\- Shows unread news items
 - Left click opens newsboat
 - Middle click syncs RSS feeds
 <b>Note:</b> Only one instance of newsboat (including updates) may be running at a time." ;;
 esac
 
- cat /tmp/newsupdate 2>/dev/null || echo "$(newsboat -x print-unread | awk '{ print $1}' | sed s/^0$//g)$(cat ~/.config/newsboat/.update 2>/dev/null)"
+if ping -q -c 1 1.1.1.1 > /dev/null; then
+	pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R || /usr/bin/newsboat -x reload
+fi
+
+echo "$(newsboat -x print-unread | awk '{print " "$1}' | sed 's/^ 0$//g')"

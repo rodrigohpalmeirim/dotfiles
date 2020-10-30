@@ -13,5 +13,19 @@
     {
         "key": "ctrl+alt+s",
         "command": "git.sync"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "-workbench.action.showAllSymbols"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.focus",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.focusLastEditorGroup",
+        "when": "terminalFocus"
     }
 ]

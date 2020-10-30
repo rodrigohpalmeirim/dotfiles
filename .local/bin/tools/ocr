@@ -1,17 +1,16 @@
-#!/bin/bash 
+#!/bin/sh
 # Dependencies: tesseract-ocr imagemagick scrot xsel
 echo "Draw a box around the text to be recognized"
 
 SCR_IMG=`mktemp`
 trap "rm $SCR_IMG*" EXIT
 
-scrot -s $SCR_IMG.png -q 100    
-# increase image quality with option -q from default 75 to 100
+maim -s $SCR_IMG.png
 
-mogrify -modulate 100,0 -resize 400% $SCR_IMG.png 
+mogrify -modulate 100,0 -resize 400% $SCR_IMG.png
 #should increase detection rate
 
-tesseract $SCR_IMG.png $SCR_IMG &> /dev/null
+tesseract $SCR_IMG.png $SCR_IMG -l por+eng
 cat $SCR_IMG.txt | xsel -bi
 
 exit

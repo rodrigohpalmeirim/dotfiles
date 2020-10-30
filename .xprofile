@@ -12,5 +12,5 @@ unclutter &		# Remove mouse when idle
 # compton &		# xcompmgr for transparency
 dunst &			# dunst for notifications
 mpdupdate &
-#~/scripts/clouds.sh &
+mountclouds &
 [ "$XDG_CURRENT_DESKTOP" = "KDE" ] || [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] || export QT_QPA_PLATFORMTHEME="qt5ct"

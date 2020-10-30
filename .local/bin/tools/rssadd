@@ -1,9 +1,10 @@
 #!/bin/sh
-! echo "$1" | grep "https*://\S\+\.[A-Za-z]\+\S*" >/dev/null &&
+url="${1:-$(xclip -out)}"
+! echo "$url" | grep "https*://\S\+\.[A-Za-z]\+\S*" >/dev/null &&
 	notify-send "That doesn't look like a full URL." && exit
 RSSFILE="$HOME/.config/newsboat/urls"
-if awk '{print $1}' "$RSSFILE" | grep "^$1$" >/dev/null; then
+if awk '{print $url}' "$RSSFILE" | grep "^$url$" >/dev/null; then
 	notify-send "You already have this RSS feed."
 else
-	echo "$1" >> "$RSSFILE" && notify-send "RSS feed added."
+	echo "$url" >> "$RSSFILE" && notify-send "RSS feed added."
 fi
