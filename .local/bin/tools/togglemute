@@ -1,0 +1,7 @@
+if [ -z "$(amixer -D pulse get Capture | grep "off")" ]; then
+	amixer -D pulse set Capture nocap
+	muteoverlay -b -x 935 &
+else
+	amixer -D pulse set Capture cap
+	pkill muteoverlay
+fi

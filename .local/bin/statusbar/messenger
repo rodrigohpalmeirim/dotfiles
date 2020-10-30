@@ -1,0 +1,13 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1) ddlaunch caprine > /dev/null && echo 0 > /tmp/messenger_unread_count ;;
+	3) notify-send "Messenger module" "\- Shows the unread notification count.
+- Click to show Caprine." ;;
+esac
+
+count=$(cat /tmp/messenger_unread_count)
+
+printf ""
+[ "$count" -ge 1 ] && printf " $count"
+printf "\n"

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+MOVIES_DIR=~/Movies/
+
+notify-send "Movie download finished"
+
+for dir in "$MOVIES_DIR"/*; do
+	mv "$dir"/*/* "$dir" 2> /dev/null
+	rmdir "$dir"/* 2> /dev/null
+	rm "$dir"/*.jpg 2> /dev/null
+	rm "$dir"/*.txt 2> /dev/null
+	if [[ -n $(ls "$dir"/*.srt 2> /dev/null) ]]; then
+		notify-send "Subtitles found. Merging..."
+		sub="$(ls "$dir"/*.srt)"
+		movie="$(ls "$dir"/{*.mp4,*.mkv})"
+		mergesub "$movie" "$sub" && notify-send "Merging complete." || notify-send "Error merging subtitles."
+	fi
+done
