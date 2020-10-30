@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "$@"
+
+[ -z $1 ] && echo "Usage: mergesub video_file [subtitles_file]" && exit 1
+
+if [ -z $2 ]; then
+	subliminal download -l en "$1"
+
+	[[ ! $(ls *.srt 2> /dev/null) ]] && echo "No subtitles found." && exit 1
+	[ $(ls *.srt | wc -l) -ge 2 ] && echo "Found multiple subtitle files. Please specify one." && exit 1
+fi
+
+sub="${2:-*.srt}" || exit 1
+
+ffmpeg -i "$1" -i "$sub" -c copy -c:s mov_text "${1%.*}-sub.${1##*.}" || exit 1
+
+#read -p "Remove original files? [y/N] " -r
+#echo
+#[[ $REPLY =~ ^[Yy] ]] && rm "$1" "$sub"
+rm "$1" "$sub"

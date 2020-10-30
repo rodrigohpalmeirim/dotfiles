@@ -1,0 +1,5 @@
+#!/bin/sh
+
+count=$(cat /tmp/discord_unread_count)
+echo $(( ${count:-0} + 1 )) > /tmp/discord_unread_count
+pkill -RTMIN+14 i3blocks

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+count=$(cat /tmp/messenger_unread_count)
+echo $(( ${count:-0} + 1 )) > /tmp/messenger_unread_count
+pkill -RTMIN+13 i3blocks

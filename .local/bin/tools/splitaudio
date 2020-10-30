@@ -1,0 +1,57 @@
+#!/bin/sh
+
+# Remove all custom sinks and loopbacks
+clean() {
+	pactl unload-module module-loopback 2> /dev/null
+	pactl unload-module module-null-sink 2> /dev/null
+}
+
+# Create sinks and loopbacks
+load_modules() {
+	pactl load-module module-null-sink sink_name=split sink_properties=device.description=Split > /dev/null
+}
+
+# Outputs configuration
+cf_output_sinks() {
+	sinks=$(pactl list sinks | grep "Description:" | awk -F ": " '{print $2}' | grep -v "Split")
+
+	output_sinks=$(printf "$sinks" | dmenu -i -multi-select -p "Output sinks")
+
+	if [ -n "$output_sinks" ]; then
+		echo "$output_sinks" | while read sink; do
+			echo "Output sink: $sink"
+			pactl load-module module-loopback latency_msec=5 source=split.monitor sink=$(pactl list sinks | grep "Description: $sink" -B 1 | head -1 | cut -d " " -f 2) > /dev/null
+		done
+	else
+		echo "Setup canceled."
+		clean
+		exit
+	fi
+}
+
+# Output application configuration
+cf_output_app() {
+	if [ -n "$(pactl list sink-inputs | grep "application.name =")" ]; then
+		output_app=$(pactl list sink-inputs | grep "application.name =" | awk -F "application.name = \"|\"" '{print $2}' | dmenu -i -p "Output application")
+
+		if [ -n "$output_app" ]; then
+			echo "Output application: $output_app"
+			output_app_id=$(pactl list sink-inputs | grep -E "Sink Input #|application\.name =" | grep "$output_app" -B 1 | head -1 | cut -d "#" -f 2)
+			pactl move-sink-input $output_app_id split
+		fi
+	else
+		echo "No output applications detected."
+	fi
+}
+
+case $(printf "Setup audio mixing\nRemove all custom sinks and loopbacks" | dmenu -i -p "Choose an option") in
+	"Setup audio mixing")
+		clean
+		load_modules
+		cf_output_sinks
+		cf_output_app
+		echo "Setup complete." ;;
+	"Remove all custom sinks and loopbacks")
+		clean
+		echo "All custom sinks and loopbacks removed." ;;
+esac

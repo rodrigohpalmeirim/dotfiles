@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd ~/Downloads
+url="${1:-$(xclip -out)}"
+json=$(! youtube-dl --simulate -o '%(title)s.%(ext)s' --print-json "$url" && notify-send "Download queue" " Invalid URL") && exit
+title=$(echo $json | jq -r .title | sed "s/'//g")
+notify-send "Download queue" "  Video added to download queue\n\n$title"
+tsp sh -c "youtube-dl --add-metadata -i -o '%(title)s.%(ext)s' '$url' && notify-send 'Download queue' '  Download finished\n\n$title' || notify-send 'Download queue' ' Error downloading video'"
