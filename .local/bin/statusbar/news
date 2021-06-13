@@ -4,8 +4,10 @@
 # Displays number of unread news items and an loading icon if updating.
 # When clicked, brings up `newsboat`.
 
+unread=$(newsboat -x print-unread | awk '{print " "$1}' | sed 's/^ 0$//g')
+
 case $BLOCK_BUTTON in
-        1) setsid "$TERMINAL" -e newsboat; pkill -RTMIN+6 i3blocks ;;
+        1) ddspawn newsboat >/dev/null; pkill -RTMIN+6 i3blocks ;;
         3) pgrep -x dunst >/dev/null && notify-send "  News module" "\- Shows unread news items
 - Left click opens newsboat
 - Middle click syncs RSS feeds
@@ -13,7 +15,13 @@ case $BLOCK_BUTTON in
 esac
 
 if ping -q -c 1 1.1.1.1 > /dev/null; then
-	pgrep -x newsboat >/dev/null && /usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R || /usr/bin/newsboat -x reload
+	sleep 1
+	if pgrep newsboat >/dev/null; then
+		/usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R
+	else
+		/usr/bin/newsboat -x reload >/dev/null
+		unread=$(newsboat -x print-unread | awk '{print " "$1}' | sed 's/^ 0$//g')
+	fi
 fi
 
-echo "$(newsboat -x print-unread | awk '{print " "$1}' | sed 's/^ 0$//g')"
+echo "$unread"

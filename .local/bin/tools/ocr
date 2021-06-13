@@ -13,4 +13,6 @@ mogrify -modulate 100,0 -resize 400% $SCR_IMG.png
 tesseract $SCR_IMG.png $SCR_IMG -l por+eng
 cat $SCR_IMG.txt | xsel -bi
 
+notify-send "OCR text copied to clipboard!" -u low -t 2000
+
 exit

@@ -6,7 +6,9 @@ control + alt + l
 super + r
 	rofi -modi window,drun,run,ssh -show drun
 super + e
-	$TERMINAL -e ranger
+	ddspawn ranger
+super + c
+	ddspawn qalc
 super + shift + c
 	$TERMINAL -e configmenu
 super + m
@@ -15,6 +17,8 @@ super + d
 	ddlaunch discord && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
 super + s
 	ddlaunch spotify && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
+super + shift + n
+	ddspawn newsboat >/dev/null; pkill -RTMIN+6 i3blocks
 
 super + u
 	ddspawn $SHELL
@@ -26,14 +30,6 @@ super + shift + a
 	ddspawn pulsemixer; pkill -RTMIN+10 i3blocks
 #super + shift + c
 #	camtoggle
-#super + shift + e
-#	tutorialvids
-super + w
-	webby | xargs -r $BROWSER
-super + shift + w
-	$BROWSER
-super + o
-	opera
 super + b
 	brave
 super + v
@@ -44,7 +40,7 @@ super + n
 	ddspawn nvim
 
 super + shift + m
-    cat /tmp/current_link |dmenu -c && xdg-open "$(cat /tmp/current_link)"
+	python ~/Projects/auto-uni/openlink.py
 
 
 # Clipboard
@@ -79,6 +75,7 @@ XF86Launch1
 	xset dpms force off
 alt + m
 	togglemute
+
 XF86AudioMute
 	lmc mute && notify-send -t 1000 "`volume`" -h string:x-canonical-private-synchronous:volume
 XF86AudioLowerVolume
@@ -109,22 +106,7 @@ XF86MonBrightnessUp
 # Recording
 # Screenshot entire screen
 Print
-	maim ~/Pictures/Screenshots/pic-full-"$(date '+%y%m%d-%H%M-%S').png"
-# Screenshot selected area
-shift + Print
-	maim -s ~/Pictures/Screenshots/pic-selected-"$(date '+%y%m%d-%H%M-%S').png"
-# Screenshot current window
-super + Print
-	maim -i "$(xdotool getactivewindow)" ~/Pictures/Screenshots/pic-window-"$(date '+%y%m%d-%H%M-%S').png"
-# Screenshot entire screen to clipboard
-control + Print
-	maim | xclip -selection clipboard -t image/png
-# Screenshot selected area
-control + shift + Print
-	maim -s | xclip -selection clipboard -t image/png
-# Screenshot current window
-control + super + Print
-	maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png
+	maimpick
 # Record audio or video
 alt + Print
 	dmenurecord

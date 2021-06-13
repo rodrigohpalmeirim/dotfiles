@@ -1,0 +1,10 @@
+#!/bin/sh
+case "$(printf "麗 Selected area \\n麗 Selected area\\n Full screen \\n Full screen\\n視 Window \\n視 Window\\n OCR" | rofi -dmenu -p "Screenshot" -theme ~/.config/rofi/screenshot -location 5)" in
+	" OCR") ocr ;;
+	"麗 Selected area") maim -s $SCREENSHOTS/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
+	"麗 Selected area ") maim -s | xclip -selection clipboard -t image/png ;;
+	"視 Window") maim -u -i "$(xdotool getactivewindow)" $SCREENSHOTS/pic-window-"$(date '+%y%m%d-%H%M-%S').png" ;;
+	" Full screen") sleep 0.1; maim $SCREENSHOTS/pic-full-"$(date '+%y%m%d-%H%M-%S').png" ;;
+	"視 Window ") maim -i "$(xdotool getactivewindow)" | xclip -selection clipboard -t image/png ;;
+	" Full screen ") sleep 0.05; maim | xclip -selection clipboard -t image/png ;;
+esac

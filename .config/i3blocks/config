@@ -33,8 +33,19 @@ markup=pango
 #interval=30
 
 [schedule]
-command=python3 -u /home/rodrigo/schedule-script/countdown.py
-interval=persist
+command=python /home/rodrigo/Projects/auto-uni/countdown.py
+interval=60
+
+#[banano]
+#interval=600
+#command=echo "  $(($(curl https://stats.foldingathome.org/api/donor/35783112 -s | jq -r '.teams[0].wus') - $(curl https://bananominer.com/user_name/53012rdgyaoc -s | jq -r '.payments[0].work_units'))) WUs"
+
+#[crypto]
+#interval=300
+#command=crypto-status BAN "$(cat ~/Documents/coinmarketcap-api-key.txt)"
+
+#[binance-balance]
+#interval=60
 
 [messenger]
 interval=once
@@ -47,10 +58,6 @@ signal=14
 [news]
 interval=60
 signal=6
-
-#[banano]
-#interval=600
-#command=echo "  $(($(curl https://stats.foldingathome.org/api/donor/35783112 -s | jq -r '.teams[0].wus') - $(curl https://bananominer.com/user_name/53012rdgyaoc -s | jq -r '.payments[0].work_units'))) WUs"
 
 [cpu-utilization]
 #label=

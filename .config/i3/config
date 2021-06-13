@@ -53,10 +53,6 @@ for_window [title="Chat"] floating enable
 for_window [title="Chat"] resize set 330 500
 for_window [title="Chat"] move position 1590 580
 
-for_window [title="Android Webcam Server - Brave"] floating enable
-for_window [title="Android Webcam Server - Brave"] sticky enable
-for_window [title="Android Webcam Server - Brave"] resize set 480 260
-
 bar {
 	font pango:Font Awesome 5 Free Regular 10
 	status_command i3blocks
@@ -106,8 +102,6 @@ bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
-bindsym $mod+c			exec --no-startup-id ddspawn insect
-
 bindsym $mod+g			gaps inner current plus 5
 bindsym $mod+Shift+g		gaps inner current minus 5
 
@@ -148,7 +142,7 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 bindsym $mod+Shift+b			bar mode toggle
 #bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
-bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
+#bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right
 
 # #---Workspace Bindings---# #
 bindsym $mod+Home		workspace $ws1

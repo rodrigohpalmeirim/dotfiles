@@ -1,18 +1,28 @@
 #!/bin/bash
 
-MOVIES_DIR=~/Movies/
+MOVIES_DIR=~/clouds/OneDrive\ IST/Movies/
 
 notify-send "Movie download finished"
+
+sleep 1
 
 for dir in "$MOVIES_DIR"/*; do
 	mv "$dir"/*/* "$dir" 2> /dev/null
 	rmdir "$dir"/* 2> /dev/null
 	rm "$dir"/*.jpg 2> /dev/null
 	rm "$dir"/*.txt 2> /dev/null
-	if [[ -n $(ls "$dir"/*.srt 2> /dev/null) ]]; then
-		notify-send "Subtitles found. Merging..."
-		sub="$(ls "$dir"/*.srt)"
-		movie="$(ls "$dir"/{*.mp4,*.mkv})"
-		mergesub "$movie" "$sub" && notify-send "Merging complete." || notify-send "Error merging subtitles."
+	if [[ -n $(ls "$dir" -I "*-sub.*" -I "*.srt" 2> /dev/null) ]]; then
+		cd "$dir"
+		if [[ -n $(ls "$dir"/*.srt 2> /dev/null) ]]; then
+			notify-send "Subtitles found. Merging..."
+			sub="$(ls *.srt)"
+			movie="$(ls -I "*.srt" -I "*.vtt")"
+			mergesub "$movie" "$sub" && notify-send "Merging complete." || notify-send "Error merging subtitles."
+		else
+			notify-send "Downloading and merging subtitles..."
+			movie="$(ls -I "*.srt" -I "*.vtt")"
+			mergesub "$movie" && notify-send "Subtitles downloaded and merged." || notify-send "Error downloading or merging subtitles."
+		fi
+		cd -
 	fi
 done
