@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOWNLOAD_DIR=~/Movies/
+DOWNLOAD_DIR=~/clouds/OneDrive\ IST/Movies/
 
 title="${@:-$(dmenu -p "Title")}" || exit
 json=$(curl -G --data-urlencode query_term="$title" "https://yts.mx/api/v2/list_movies.json" 2> /dev/null)

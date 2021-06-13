@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	echo "Usage: guitartab <song> [-d|--dump]"
+	exit
+fi
+
+song=""
+
+for i in "$@"; do
+case $i in
+	-d|--dump)
+		dump=1
+		shift ;;
+	*)
+		song+="$1 "
+		shift ;;
+esac
+done
+
+googler --site="tabs.ultimate-guitar.com" $song --colorize always --np
+read -p "Result number: " n
+
+url=$(googler --json --site="tabs.ultimate-guitar.com" $song | jq -r ".[$((n-1))].url")
+
+tab=$(
+	curl -s "$url" | \
+	grep -o -E "&quot;content&quot;:&quot;.*&quot;revision_id" | \
+	sed 's/\\n/\n/g' | \
+	sed 's/\\r/\r/g' | \
+	sed 's/\[\/*tab\]//g' | \
+	sed 's/\[\/*ch\]//g' | \
+	sed 's/\\\\/\\/g' | \
+	sed 's/&quot;content&quot;:&quot;//g' | \
+	sed 's/&quot;,&quot;revision_id//g' | \
+	sed 's/^/\t\t\t\t/g' | \
+	recode html
+)
+
+if [ -z "$dump" ]; then
+	echo "$tab" | less --chop-long-lines --shift 2
+else
+	echo "$tab"
+fi

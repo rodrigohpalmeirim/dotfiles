@@ -1,14 +1,16 @@
 {
 	"followSystemAppearance": true,
-	"darkMode": true,
+	"darkMode": false,
 	"privateMode": false,
+	"showPrivateModePrompt": true,
 	"vibrancy": "none",
-	"zoomFactor": 1.1,
+	"zoomFactor": 1,
 	"lastWindowState": {
-		"x": 529,
-		"y": 279,
-		"width": 883,
-		"height": 584
+		"x": 515,
+		"y": 255,
+		"width": 890,
+		"height": 591,
+		"isMaximized": false
 	},
 	"menuBarMode": false,
 	"showDockIcon": true,
@@ -20,7 +22,7 @@
 	"flashWindowOnMessage": true,
 	"notificationMessagePreview": true,
 	"block": {
-		"chatSeen": false,
+		"chatSeen": true,
 		"typingIndicator": false,
 		"deliveryReceipt": false
 	},
@@ -29,14 +31,11 @@
 	"sidebar": "default",
 	"autoHideMenuBar": true,
 	"notificationsMuted": false,
+	"callRingtoneMuted": false,
 	"hardwareAcceleration": true,
-	"quitOnWindowClose": true,
+	"quitOnWindowClose": false,
 	"keepMeSignedIn": true,
 	"autoplayVideos": true,
-	"showPrivateModePrompt": true,
-	"callRingtoneMuted": false,
-	"spellCheckerLanguages": [
-		"pt-PT"
-	],
-	"isSpellCheckerEnabled": true
+	"isSpellCheckerEnabled": true,
+	"spellCheckerLanguages": []
 }

@@ -1,16 +1,19 @@
 {
-	"changeLog": {
-		"version": "1.1.7"
-	},
-	"changelog": {
-		"currentversion": "1.1.4"
+	"dates": {
+		"quoteDate": {}
 	},
 	"formats": {
 		"Standard": "$quote $mention "
 	},
+	"general": {
+		"autoAddNewLine": true,
+		"holdShiftToolbar": false,
+		"alwaysCopy": false
+	},
 	"settings": {
 		"alwaysCopy": false,
 		"forceZeros": false,
+		"holdShiftToolbar": false,
 		"ignoreMentionInDM": true,
 		"quoteOnlySelected": true
 	}

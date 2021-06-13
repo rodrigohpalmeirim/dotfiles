@@ -114,13 +114,11 @@
 [caprine]
 	appname = Caprine
 	script = messenger_incunread
-
 [discord]
 	appname = discord
 	script = discord_incunread
 [brave-ads]
 	appname = Brave
-	summary = "*Crocs*"
 	summary = "*Lenovo*"
 	format = ""
 

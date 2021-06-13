@@ -1,0 +1,5 @@
+rel_path="$(realpath --relative-to='/home/rodrigo/clouds/OneDrive IST/' "$1")"
+echo $rel_path
+link=$(rclone link onedrive-ist:"$rel_path") && notify-send "Link copied to clipboard" || notify-send "Failed to get link"
+id=$(echo $link | cut -c79-)
+echo "https://ulisboa-my.sharepoint.com/personal/ist192550_tecnico_ulisboa_pt/_layouts/15/download.aspx?share=$id" | xclip -selection clipboard

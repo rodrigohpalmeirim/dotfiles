@@ -100,6 +100,8 @@ case "$1" in
 	screencast) screencast;;
 	audio) audio;;
 	video) video;;
+	webcam) webcam;;
+	webcamhidef) webcamhidef;;
 	kill) killrecording;;
 	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
 esac

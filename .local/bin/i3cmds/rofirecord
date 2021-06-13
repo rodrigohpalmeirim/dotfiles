@@ -1,0 +1,61 @@
+#!/bin/sh
+
+updateicon() { \
+	echo "$1" > /tmp/recordingicon
+	pkill -RTMIN+9 i3blocks
+	}
+
+killrecording() {
+	recpid="$(cat /tmp/recordingpid)"
+	# kill with SIGTERM, allowing finishing touches.
+	kill -15 "$recpid"
+	rm -f /tmp/recordingpid
+	updateicon ""
+	pkill -RTMIN+9 i3blocks
+	# even after SIGTERM, ffmpeg may still run, so SIGKILL it.
+	sleep 3
+	kill -9 "$recpid"
+	exit
+}
+
+format=flac
+filename="$HOME/recording-$(date '+%y%m%d-%H%M-%S')"
+
+# Select video source
+video_source=$(v4l2-ctl --list-devices | grep : | cut -d"(" -f1 | rofi -dmenu -p "Video source" -i)
+if [ -n "$video_source" ]; then
+	stream=$(v4l2-ctl --list-devices | grep -A 1 "$video_source" | tail -1)
+	video_input="-f v4l2 -i $stream"
+	format=mkv
+fi
+
+# Select audio sources
+audio_sources=$(pactl list sources | grep Description | grep -v Monitor | awk -F ": " '{print $2}' | rofi -dmenu -i -multi-select -p "Audio sources (select multiple)")
+if [ -n "$audio_sources" ]; then
+	while read name; do
+		source=$(pactl list sources | grep "Description: $name" -B 1 | head -1 | cut -d " " -f 2)
+		audio_inputs="$audio_inputs -f pulse -i $source"
+	done <<< "$audio_sources"
+	audio_inputs="$audio_inputs -c:a flac"
+fi
+
+command="ffmpeg $video_input $audio_inputs $filename.$format"
+echo $command
+
+# eval $command
+# echo $! > /tmp/recordingpid
+# updateicon ""
+
+
+asktoend() { \
+	response=$(printf "No\\nYes" | dmenu -i -p "Recording still active. End recording?") &&
+	[ "$response" = "Yes" ] &&  killrecording
+}
+
+#case "$1" in
+# 	screencast) screencast;;
+#	audio) audio;;
+#	video) video;;
+#	kill) killrecording;;
+#	*) ([ -f /tmp/recordingpid ] && asktoend && exit) || askrecording;;
+#esac

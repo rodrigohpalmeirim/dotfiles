@@ -13,3 +13,4 @@ image/svg+xml=display.desktop
 x-scheme-handler/discord-478576776990425110=discord-478576776990425110.desktop
 inode/directory=ranger.desktop
 x-scheme-handler/etcher=balena-etcher-electron.desktop
+x-scheme-handler/eclipse+command x-scheme-handler/eclipse+mpc=_usr_lib_eclipse_.desktop
