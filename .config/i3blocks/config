@@ -40,16 +40,16 @@ interval=60
 #interval=600
 #command=echo "  $(($(curl https://stats.foldingathome.org/api/donor/35783112 -s | jq -r '.teams[0].wus') - $(curl https://bananominer.com/user_name/53012rdgyaoc -s | jq -r '.payments[0].work_units'))) WUs"
 
-#[crypto]
-#interval=300
-#command=crypto-status BAN "$(cat ~/Documents/coinmarketcap-api-key.txt)"
+[crypto]
+interval=300
+command=crypto-status BTC "$(cat ~/Documents/coinmarketcap-api-key.txt)"
 
 #[binance-balance]
 #interval=60
 
-[messenger]
-interval=once
-signal=13
+#[messenger]
+#interval=once
+#signal=13
 
 [discord]
 interval=once

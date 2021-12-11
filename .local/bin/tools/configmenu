@@ -1,5 +1,8 @@
+#!/bin/bash
+
 declare -A configs=(
 
+[alacritty]=~/.config/alacritty/alacritty.yml
 [bmfiles]=~/.config/bmfiles
 [bmdirs]=~/.config/bmdirs
 [bash]=~/.bashrc
