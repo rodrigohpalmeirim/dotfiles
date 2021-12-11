@@ -19,6 +19,7 @@ Plug 'tpope/vim-commentary'
 Plug 'vifm/vifm.vim'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'ap/vim-css-color'
 call plug#end()
 
 set bg=light
@@ -26,6 +27,7 @@ set go=a
 set mouse=a
 set nohlsearch
 set clipboard+=unnamedplus
+set termguicolors
 
 " Some basics:
 	nnoremap c "_c
@@ -104,6 +106,9 @@ set clipboard+=unnamedplus
 
 " Update binds when sxhkdrc is updated.
 	autocmd BufWritePost *sxhkdrc !pkill -USR1 sxhkd
+
+" Restart polybar when config is updated.
+	autocmd BufWritePost ~/.config/polybar/config !polybar-msg cmd restart
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %

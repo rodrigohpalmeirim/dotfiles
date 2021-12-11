@@ -7,13 +7,13 @@
 
 [ -z "$1" ] && exit
 
-script=$1
+script=$@
 shift
-if xwininfo -tree -root | grep "(\"dropdown_$script\" ";
-then
+if xwininfo -tree -root | grep "(\"dropdown_$script\" "; then
 	echo "Window detected."
 	i3 "[instance=\"dropdown_$script\"] scratchpad show"
 else
 	echo "Window not detected... spawning."
-	i3 "exec --no-startup-id $TERMINAL -n dropdown_$script $@ -e $script"
+	echo $script
+	i3 "exec --no-startup-id $TERMINAL --class dropdown_$script $@ -e $script"
 fi

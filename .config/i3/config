@@ -9,8 +9,12 @@
 
 exec "echo 1 > ~/.config/battery-notify-state"
 exec "rm -rf ~/Downloads/Temp/*"
-exec "caprine"
 exec "./discord-revive.sh"
+exec "signal-desktop"
+exec "polybar main"
+exec "polybar tray"
+exec "polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd hide"
+exec "battery BAT0"
 
 exec_always "xrdb ~/.Xdefaults"
 exec_always "[ -z \"$(cat /proc/acpi/button/lid/LID/state | grep closed)\" ] && xrandr --output DP1 --above eDP1 --auto || xrandr --output eDP1 --off --auto"
@@ -39,37 +43,38 @@ for_window [instance="dropdown_tmuxdd"] resize set 625 450
 for_window [instance="dropdown_tmuxdd"] border pixel 3
 #for_window [instance="dropdown_insect"] border pixel 2
 #for_window [instance="dropdown_*"] move position center
-for_window [instance="caprine"] floating enable
-for_window [instance="caprine"] move scratchpad
 
 for_window [instance="discord"] floating enable
 for_window [instance="discord"] move scratchpad
 
+for_window [instance="signal"] floating enable
+for_window [instance="signal"] move scratchpad
+
 for_window [instance="spotify"] floating enable
-for_window [instance="spotify"] resize set 1100 700
+for_window [instance="spotify"] resize set 1200 800
 for_window [instance="spotify"] move scratchpad
 
 for_window [title="Chat"] floating enable
 for_window [title="Chat"] resize set 330 500
 for_window [title="Chat"] move position 1590 580
 
-bar {
-	font pango:Font Awesome 5 Free Regular 10
-	status_command i3blocks
-	position top
-	mode dock
-	modifier None
-
-	colors {
-		background #242933
-		statusline #D8DEE9
-		#			border		background	text
-		focused_workspace	#4C566A		#88C0D0		#2E3440
-		inactive_workspace	#242933		#242933		#81A1C1
-		active_workspace	#242933		#5E81AC		#2E3440
-		urgent_workspace	#BF616A		#BF616A		#ffffff
-	}
-}
+#bar {
+#	font pango:Font Awesome 5 Free Solid 10
+#	status_command i3blocks
+#	position top
+#	mode dock
+#	modifier None
+#
+#	colors {
+#		background #242933
+#		statusline #D8DEE9
+#		#			border		background	text
+#		focused_workspace	#242933		#88C0D0		#2E3440
+#		inactive_workspace	#242933		#242933		#81A1C1
+#		active_workspace	#242933		#5E81AC		#2E3440
+#		urgent_workspace	#BF616A		#BF616A		#ffffff
+#	}
+#}
 
 # #---Basic Bindings---# #
 bindsym $mod+Shift+Return	exec --no-startup-id samedir
@@ -139,7 +144,6 @@ bindsym $mod+Shift+z		gaps outer current minus 5
 
 #bindsym $mod+v			exec --no-startup-id $term -e $EDITOR -c "VimwikiIndex"
 
-bindsym $mod+Shift+b			bar mode toggle
 #bindsym $mod+Shift+b		floating toggle; sticky toggle; exec --no-startup-id hover left
 
 #bindsym $mod+Shift+n		floating toggle; sticky toggle; exec --no-startup-id hover right

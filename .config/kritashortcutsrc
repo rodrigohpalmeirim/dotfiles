@@ -1,2 +1,5 @@
 [Shortcuts]
+KisToolSelectRectangular=R
+deselect=D
 reset_canvas_rotation=Ctrl+=
+reset_fg_bg=none

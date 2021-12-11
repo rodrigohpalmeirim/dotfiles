@@ -8,3 +8,5 @@
 progbar.color0: #242933
 progbar.color6: nord8
 progbar.color7: nord3
+
+Xft.dpi: 96

@@ -7,7 +7,6 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/rodrigo/.config/.oh-my-zsh"
-export TERM="xterm"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -35,6 +34,9 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+bindkey "^[[7~" beginning-of-line
+bindkey "^[[8~" end-of-line
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"

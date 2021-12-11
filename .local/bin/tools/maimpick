@@ -1,5 +1,5 @@
 #!/bin/sh
-case "$(printf "麗 Selected area \\n麗 Selected area\\n Full screen \\n Full screen\\n視 Window \\n視 Window\\n OCR" | rofi -dmenu -p "Screenshot" -theme ~/.config/rofi/screenshot -location 5)" in
+case "$(printf "麗 Selected area \\n麗 Selected area\\n Full screen \\n Full screen\\n視 Window \\n視 Window\\n OCR" | rofi -dmenu -p "Screenshot" -theme ~/.config/rofi/themes/screenshot -location 5)" in
 	" OCR") ocr ;;
 	"麗 Selected area") maim -s $SCREENSHOTS/pic-selected-"$(date '+%y%m%d-%H%M-%S').png" ;;
 	"麗 Selected area ") maim -s | xclip -selection clipboard -t image/png ;;

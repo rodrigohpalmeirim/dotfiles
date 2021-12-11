@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 if [ $(pgrep sleep -c) -lt 3 ]; then
 	echo $(pgrep sleep -c)
 	$TERMINAL & sleep 3

@@ -1,15 +1,13 @@
 {
-	"followSystemAppearance": true,
-	"darkMode": false,
 	"privateMode": false,
 	"showPrivateModePrompt": true,
 	"vibrancy": "none",
 	"zoomFactor": 1,
 	"lastWindowState": {
-		"x": 515,
-		"y": 255,
-		"width": 890,
-		"height": 591,
+		"x": 519,
+		"y": 245,
+		"width": 882,
+		"height": 610,
 		"isMaximized": false
 	},
 	"menuBarMode": false,
@@ -37,5 +35,6 @@
 	"keepMeSignedIn": true,
 	"autoplayVideos": true,
 	"isSpellCheckerEnabled": true,
-	"spellCheckerLanguages": []
+	"spellCheckerLanguages": [],
+	"theme": "light"
 }

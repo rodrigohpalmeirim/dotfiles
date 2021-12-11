@@ -14,10 +14,9 @@ case $BLOCK_BUTTON in
 <b>Note:</b> Only one instance of newsboat (including updates) may be running at a time." ;;
 esac
 
-if ping -q -c 1 1.1.1.1 > /dev/null; then
-	sleep 1
-	if pgrep newsboat >/dev/null; then
-		/usr/bin/xdotool key --window "$(/usr/bin/xdotool search --name newsboat)" R
+if ping -q -c 1 1.1.1.1 > /dev/null 2>&1; then
+	if pgrep newsboat >/dev/null 2>&1; then
+		unread=""
 	else
 		/usr/bin/newsboat -x reload >/dev/null
 		unread=$(newsboat -x print-unread | awk '{print " "$1}' | sed 's/^ 0$//g')

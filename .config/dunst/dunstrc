@@ -1,11 +1,11 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "350x5-0+24"
+    width = (0, 300)
+    offset = 0x24
     indicate_hidden = yes
     shrink = yes
     transparency = 0
-    notification_height = 0
     separator_height = 2
     padding = 5 #0
     horizontal_padding = 8
@@ -61,16 +61,9 @@
 
     title = Dunst
     class = Dunst
-    startup_notification = false
     force_xinerama = false
 [experimental]
     per_monitor_dpi = false
-
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    history = ctrl+backslash
-    context = ctrl+shift+period
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
@@ -117,10 +110,9 @@
 [discord]
 	appname = discord
 	script = discord_incunread
-[brave-ads]
-	appname = Brave
-	summary = "*Lenovo*"
-	format = ""
+[signal]
+	appname = Signal
+	script = signal_incunread
 
 #[espeak]
 #    summary = "*"

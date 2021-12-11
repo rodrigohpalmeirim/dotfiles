@@ -16,8 +16,8 @@ case $BLOCK_BUTTON in
 - Click to show bluetooth manager" ;;
 esac
 
-if [[ $(bluetoothctl info $(bluetoothctl devices | grep "Designer Keyboard" | awk '{print $2}') | grep "Connected: yes") ]]; then
-	if [[ $(cat $TEMP) -ne "1" ]]; then
+if [ "$(bluetoothctl info $(bluetoothctl devices | grep "Designer Keyboard" | awk '{print $2}') | grep "Connected: yes")" ]; then
+	if [ "$(cat $TEMP 2> /dev/null)" != "1" ]; then
 		kblayout
 		xset r rate 300 50
 		echo 1 > $TEMP

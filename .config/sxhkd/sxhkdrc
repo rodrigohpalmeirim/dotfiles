@@ -11,14 +11,18 @@ super + c
 	ddspawn qalc
 super + shift + c
 	$TERMINAL -e configmenu
-super + m
-	ddlaunch caprine && echo 0 > /tmp/messenger_unread_count && pkill -RTMIN+13 i3blocks
+#super + m
+#	ddlaunch caprine && echo 0 > /tmp/messenger_unread_count && pkill -RTMIN+13 i3blocks
 super + d
-	ddlaunch discord && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
+	ddlaunch discord && echo 0 > /tmp/discord_unread_count && polybar-msg hook discord 1
+super + m
+	ddlaunch signal && echo 0 > /tmp/signal_unread_count && polybar-msg hook signal 1
 super + s
-	ddlaunch spotify && echo 0 > /tmp/discord_unread_count && pkill -RTMIN+14 i3blocks
+	ddlaunch spotify
 super + shift + n
 	ddspawn newsboat >/dev/null; pkill -RTMIN+6 i3blocks
+super + shift + b
+	polybar-msg -p $(xdo pid -m -a polybar-main_DP1) cmd toggle
 
 super + u
 	ddspawn $SHELL
@@ -42,6 +46,13 @@ super + n
 super + shift + m
 	python ~/Projects/auto-uni/openlink.py
 
+# Notifications
+control + space
+	dunstctl close
+control + shift + space
+	dunstctl close-all
+control + backslash
+	dunstctl history-pop
 
 # Clipboard
 control + alt + e
