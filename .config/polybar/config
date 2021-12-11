@@ -120,10 +120,9 @@ content-foreground = ${colors.module-background}
 
 [module/tray]
 type = custom/ipc
-hook-0 = echo 
-hook-1 = echo 
+hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd show && polybar-msg hook tray 2:}%{A}" &
+hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd hide && polybar-msg hook tray 1:}%{A}" &
 initial = 1
-click-left = polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd toggle
 format-foreground = ${colors.background-4}
 
 ;=============
