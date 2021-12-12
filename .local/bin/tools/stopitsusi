@@ -1,7 +1,0 @@
-#!/bin/sh
-if [ $(pgrep sleep -c) -lt 3 ]; then
-	echo $(pgrep sleep -c)
-	$TERMINAL & sleep 3
-else
-	notify-send -u critical "Stop it Susi!"
-fi
