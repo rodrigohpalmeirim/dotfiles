@@ -1,23 +1,23 @@
-#!/bin/sh
-location="$1"; [ -z "$location" ] || { location="$location+" && rm -f "$HOME/.local/share/weatherreport" ;}
+#!/bin/bash
 
-getforecast() { ping -q -c 1 1.1.1.1 >/dev/null || exit 1
-curl -s "wttr.in/$location" > "$HOME/.local/share/weatherreport" || exit 1 ;}
+declare -A day=([✨]= [☁️]=  [🌫]=  [🌧]=  [🌧]=  [❄️]=  [❄️]=  [🌦]=  [🌦]=  [🌧]=  [🌧]=  [🌨]=  [🌨]=  [⛅️]=  [☀️]=  [🌩]=  [⛈]=  [⛈]=  [☁️]=)
+declare -A night=([✨]= [☁️]=  [🌫]=  [🌧]=  [🌧]=  [❄️]=  [❄️]=  [🌦]=  [🌦]= [🌧]=  [🌧]=  [🌨]=  [🌨]=  [⛅️]=  [☀️]=  [🌩]=  [⛈]=  [⛈]=  [☁️]=)
 
-showweather() { printf "%s" "$(sed '16q;d' "$HOME/.local/share/weatherreport" | grep -wo "[0-9]*%" | sort -n | sed -e '$!d' | sed -e "s/^/☔ /g" | tr -d '\n')"
-sed '13q;d' "$HOME/.local/share/weatherreport" | grep -o "m\\(-\\)*[0-9]\\+" | sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | awk '{print " ❄️",$1 "°","🌞",$2 "°"}' ;}
+info=$(curl -s wttr.in/Telheiras?format="%S+%s+%c+%t\n")
 
-case $BLOCK_BUTTON in
-    1) $TERMINAL -e less -S "$HOME/.local/share/weatherreport" ;;
-    2) getforecast && showweather ;;
-    3) pgrep -x dunst >/dev/null && notify-send "🌈 Weather module" "\- Left click for full forecast.
-- Middle click to update forecast.
-☔: Chance of rain/snow
-❄: Daily low
-🌞: Daily high" ;;
-esac
+sunrise=$(echo $info | cut -f 1 -d " ")
+sunset=$(echo $info | cut -f 2 -d " ")
+emoji=$(echo $info | cut -f 3 -d " " | xargs)
+temperature=$(echo $info | cut -f 4 -d " " | sed "s/+//")
 
-if [ "$(stat -c %y "$HOME/.local/share/weatherreport" >/dev/null 2>&1 | awk '{print $1}')" != "$(date '+%Y-%m-%d')" ]
-	then getforecast && showweather
-	else showweather
+sunrise=$(date --date=$sunrise +%s)
+sunset=$(date --date=$sunset +%s)
+now=$(date +%s)
+
+if [ "$sunrise" -le "$now" -a "$now" -le "$sunset" ]; then
+	icon=${day[$emoji]}
+else
+	icon=${night[$emoji]}
 fi
+
+echo "%{T6}$icon %{T-} ${temperature}"

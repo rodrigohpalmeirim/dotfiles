@@ -1,8 +1,0 @@
-#!/bin/sh
-case $BLOCK_BUTTON in
-	1) ddspawn - "tty-clock -scbC 4 -f %d-%m-%Y -a 30000000 -d 0 &" >/dev/null ;;
-	2) timer ;;
-	3) pgrep -x dunst >/dev/null && notify-send "Clock module" "\- Left to show clock" ;;
-esac
-
-date '+%H:%M'

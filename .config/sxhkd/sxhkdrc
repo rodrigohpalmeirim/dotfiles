@@ -1,6 +1,6 @@
 # Applications
 super + Return
-	stopitsusi
+	$TERMINAL
 control + alt + l
 	kblayout; xset r rate 300 50
 super + r
@@ -53,6 +53,8 @@ control + shift + space
 	dunstctl close-all
 control + backslash
 	dunstctl history-pop
+super + shift + f
+	$(dunstctl is-paused) && (dunstctl set-paused false; notify-send -t 1000 "  Notifications unpaused") || (notify-send -t 1000 "  Notifications paused"; sleep 1; dunstctl set-paused true)
 
 # Clipboard
 control + alt + e

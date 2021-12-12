@@ -9,7 +9,7 @@
 
 exec "echo 1 > ~/.config/battery-notify-state"
 exec "rm -rf ~/Downloads/Temp/*"
-exec "./discord-revive.sh"
+exec "discord-revive"
 exec "signal-desktop"
 exec "polybar main"
 exec "polybar tray"
@@ -112,12 +112,7 @@ bindsym $mod+Shift+g		gaps inner current minus 5
 
 bindsym $mod+Shift+d		gaps inner current set 0; gaps outer current set 0
 
-set $freeze Distraction-free mode (super+shift+f to reactivate bindings)
-mode "$freeze" { bindsym $mod+Shift+f mode "default"
-}
-
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f		mode "$freeze" ;; exec --no-startup-id notify-send "Distraction-free mode activated." "Press Super+Shift+f to return."
 
 #bindsym $mod+g			workspace prev
 

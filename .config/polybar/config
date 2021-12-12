@@ -69,8 +69,10 @@ font-2 = "Material Design Icons Desktop:style=Regular:pixelsize=16;4"
 ;font-3 = Fira Code:style=SemiBold:pixelsize=10;3
 font-3 = Ubuntu:style=Bold:pixelsize=11;2
 font-4 = Iosevka Nerd Font:style=Medium:size=17;4
+font-5 = Mononoki Nerd Font:pixelsize=12;2
+;font-5 = "Weather Icons:pixelsize=10;4"
 
-modules-left = left_corner date right_corner left_corner crypto space discord space signal space news right_corner
+modules-left = left_corner date space weather right_corner left_corner crypto space discord space signal space news right_corner
 modules-center = i3
 modules-right = tray empty left_corner alsa space battery space bluetooth space wlan right_corner left_corner cpu space temperature space memory space filesystem right_corner
 
@@ -380,10 +382,10 @@ type = internal/date
 interval = 5
 
 date = " %b %d (%a) "
-date-alt = ""
+;date-alt = ""
 
 time =  %H:%M
-time-alt =  %H:%M
+;time-alt =  %H:%M
 
 #format-prefix = 
 format-prefix-foreground = ${colors.foreground-1-alt}
@@ -391,7 +393,16 @@ format-prefix-foreground = ${colors.foreground-1-alt}
 format-background = ${colors.module-background}
 format-foreground = ${colors.group-1}
 
-label = "%{A1:ddspawn calcurse:}%date%%{A} %{A2:timer:}%time%%{A}"
+label = "%{A1:ddspawn calcurse:}%date%%{A} %{A1:ddspawn clock:}%{A2:timer:}%time%%{A}%{A}"
+
+[module/weather]
+type = custom/script
+exec = weather
+format-background = ${colors.module-background}
+format-foreground = ${colors.group-1}
+click-left = ddspawn forecast
+;format-font = 6
+interval = 300
 
 [module/pulseaudio]
 type = internal/pulseaudio
