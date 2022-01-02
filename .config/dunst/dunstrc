@@ -2,7 +2,7 @@
     monitor = 0
     follow = keyboard
     width = (0, 300)
-    offset = 0x24
+    offset = 0x28
     indicate_hidden = yes
     shrink = yes
     transparency = 0

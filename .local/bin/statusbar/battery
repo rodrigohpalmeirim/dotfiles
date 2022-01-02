@@ -7,7 +7,7 @@ while true; do
 
 	if [ $(cat /home/rodrigo/.config/battery-notify-state) == "1" ]; then
 		if [ $status == "Discharging" -a $capacity -le 20 ]; then
-			notify-send -u critical -t 6000 "$icon Battery at $capacity%" -h string:x-canonical-private-synchronous:battery
+			notify-send -u critical -t 6000 "Battery at $capacity%" -h string:x-canonical-private-synchronous:battery
 		fi
 	fi
 	sleep 5

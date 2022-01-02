@@ -11,8 +11,8 @@ exec "echo 1 > ~/.config/battery-notify-state"
 exec "rm -rf ~/Downloads/Temp/*"
 exec "discord-revive"
 exec "signal-desktop"
-exec "polybar main"
 exec "polybar tray"
+exec "polybar main"
 exec "polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd hide"
 exec "battery BAT0"
 
@@ -104,7 +104,7 @@ bindsym $mod+Shift+u		exec --no-startup-id i3resize down
 
 bindsym $mod+Shift+i		exec --no-startup-id i3resize up
 
-bindsym $mod+o			sticky toggle
+bindsym $mod+Shift+s		sticky toggle
 bindsym $mod+Shift+o		exec --no-startup-id i3resize right
 
 bindsym $mod+g			gaps inner current plus 5
