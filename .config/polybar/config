@@ -47,7 +47,7 @@ group-4 = ${colors.blue-3}
 module-background = ${colors.background-2}
 
 [bar/main]
-;monitor = ${env:MONITOR:HDMI-1}
+;monitor = ${env:MONITOR:DP1}
 width = 100%
 height = 28
 radius = 0.0
@@ -79,7 +79,7 @@ modules-right = tray empty left_corner alsa space battery space bluetooth space 
 ;wm-restack = bspwm
 ;wm-restack = i3
 
-;override-redirect = true
+override-redirect = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -122,8 +122,8 @@ content-foreground = ${colors.module-background}
 
 [module/tray]
 type = custom/ipc
-hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd show && polybar-msg hook tray 2:}%{A}" &
-hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd hide && polybar-msg hook tray 1:}%{A}" &
+hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd show && polybar-msg hook tray 2:}%{A}" &
+hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd hide && polybar-msg hook tray 1:}%{A}" &
 initial = 1
 format-foreground = ${colors.background-4}
 
@@ -351,12 +351,12 @@ interval = 5
 format-connected-foreground = ${colors.group-3}
 format-disconnected-foreground = ${colors.group-3}
 
-format-connected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A3:nm-connection-editor:} <label-connected>%{A}%{A}
+format-connected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} <label-connected>%{A}%{A}%{A}
 format-connected-background = ${colors.module-background}
 format-disconnected-background = ${colors.module-background}
 label-connected = %signal%%
 
-format-disconnected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A3:nm-connection-editor:} %{A}%{A}
+format-disconnected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} %{A}%{A}%{A}
 ;format-disconnected-underline = ${self.format-connected-underline}
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-1-alt}
@@ -398,6 +398,7 @@ label = "%{A1:ddspawn calcurse:}%date%%{A} %{A1:ddspawn clock:}%{A2:timer:}%time
 [module/weather]
 type = custom/script
 exec = weather
+exec-if = ping -c 1 wttr.in
 format-background = ${colors.module-background}
 format-foreground = ${colors.group-1}
 click-left = ddspawn forecast
@@ -439,6 +440,7 @@ format-muted = %{A1:ddspawn pulsemixer > /dev/null:}%{A2:#alsa.toggle:}<label-mu
 format-volume-background = ${colors.module-background}
 format-volume-foreground = ${colors.group-3}
 format-muted-background = ${colors.module-background}
+format-muted-foreground = ${colors.group-3}
 label-muted = 
 
 ramp-volume-0 = 
@@ -457,7 +459,7 @@ format-background = ${colors.module-background}
 format-foreground = ${colors.group-4}
 format-warn-background = ${colors.module-background}
 
-label-warn-foreground = ${colors.red}
+format-warn-foreground = ${colors.red}
 
 ramp-0 = 
 ramp-1 = 
