@@ -13,8 +13,9 @@ exec "discord-revive"
 exec "signal-desktop"
 exec "polybar tray"
 exec "polybar main"
-exec "polybar-msg -p $(xdo pid -m -a polybar-tray_DP1) cmd hide"
+exec "polybar-msg -p $(xdo pid -m -a polybar-tray_eDP1) cmd hide"
 exec "battery BAT0"
+exec --no-startup-id ~/.config/i3/i3unityfix.py
 
 exec_always "xrdb ~/.Xdefaults"
 exec_always "[ -z \"$(cat /proc/acpi/button/lid/LID/state | grep closed)\" ] && xrandr --output DP1 --above eDP1 --auto || xrandr --output eDP1 --off --auto"
@@ -57,6 +58,8 @@ for_window [instance="spotify"] move scratchpad
 for_window [title="Chat"] floating enable
 for_window [title="Chat"] resize set 330 500
 for_window [title="Chat"] move position 1590 580
+
+for_window [instance="matplotlib"] floating enable
 
 #bar {
 #	font pango:Font Awesome 5 Free Solid 10

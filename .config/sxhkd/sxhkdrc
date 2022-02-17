@@ -22,7 +22,7 @@ super + s
 super + shift + n
 	ddspawn newsboat >/dev/null; pkill -RTMIN+6 i3blocks
 super + shift + b
-	polybar-msg -p $(xdo pid -m -a polybar-main_DP1) cmd toggle
+	polybar-msg -p $(xdo pid -m -a polybar-main_eDP1) cmd toggle
 
 super + u
 	ddspawn $SHELL
@@ -39,7 +39,7 @@ super + b
 super + v
 	code
 super + p
-	ddspawn python
+	ddspawn ipython
 super + n
 	ddspawn nvim
 
