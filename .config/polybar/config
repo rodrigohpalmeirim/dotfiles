@@ -63,12 +63,12 @@ padding-right = 1
 module-margin-left = 0
 module-margin-right = 0
 
-font-0 = "Font Awesome 5 Free:pixelsize=10:style=Solid;2"
-font-1 = "Font Awesome 5 Brands:pixelsize=10;2"
-font-2 = "Material Design Icons Desktop:style=Regular:pixelsize=16;4"
+font-0 = Ubuntu:style=Bold:pixelsize=11;2
+font-1 = "Font Awesome 6 Free:pixelsize=11:style=Solid;2"
+font-2 = "Font Awesome 6 Brands:pixelsize=11;2"
+font-3 = "Material Design Icons Desktop:style=Regular:pixelsize=16;4"
 ;font-3 = Fira Code:style=SemiBold:pixelsize=10;3
-font-3 = Ubuntu:style=Bold:pixelsize=11;2
-font-4 = Iosevka Nerd Font:style=Medium:size=17;4
+font-4 = Iosevka Nerd Font:style=Medium:pixelsize=17;4
 font-5 = Mononoki Nerd Font:pixelsize=12;2
 ;font-5 = "Weather Icons:pixelsize=10;4"
 
@@ -115,15 +115,15 @@ content-foreground = ${colors.module-background}
 
 [module/right_corner]
 type = custom/text
-content = " "
+content = "%{T5}%{T-} "
 content-foreground = ${colors.module-background}
 
 ;=============
 
 [module/tray]
 type = custom/ipc
-hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd show && polybar-msg hook tray 2:}%{A}" &
-hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd hide && polybar-msg hook tray 1:}%{A}" &
+hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd show && polybar-msg hook tray 2:}%{T6}%{T-}%{A}" &
+hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd hide && polybar-msg hook tray 1:}%{T6}%{T-}%{A}" &
 initial = 1
 format-foreground = ${colors.background-4}
 
@@ -401,7 +401,7 @@ exec = weather
 exec-if = ping -c 1 wttr.in
 format-background = ${colors.module-background}
 format-foreground = ${colors.group-1}
-click-left = ddspawn forecast
+click-left = $TERMINAL -e forecast
 ;format-font = 6
 interval = 300
 
