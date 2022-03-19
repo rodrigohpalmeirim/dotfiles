@@ -18,10 +18,17 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 source $ZSH/oh-my-zsh.sh
 #source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 source /usr/share/fzf/key-bindings.zsh
+FZF_CTRL_T_COMMAND='find .'
 bindkey '^F' fzf-file-widget
 source /usr/share/fzf/completion.zsh
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+
+LFCD="$HOME/.config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+bindkey -s '^o' 'lfcd\n'
 
 # History in cache directory:
 HISTSIZE=100000
