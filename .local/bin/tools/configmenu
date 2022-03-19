@@ -1,27 +1,28 @@
 #!/bin/bash
 
 declare -A configs=(
-
-[alacritty]=~/.config/alacritty/alacritty.yml
-[bmfiles]=~/.config/bmfiles
-[bmdirs]=~/.config/bmdirs
-[bash]=~/.bashrc
-[aliases]=~/.config/aliasrc
-[zsh]=~/.zshrc
-[nvim]=~/.config/nvim/init.vim
-[i3]=~/.config/i3/config
-[Xdefaults]=~/.Xdefaults
-[i3blocks]=~/.config/i3blocks/config
-[keyboard shortcuts]=~/.config/sxhkd/sxhkdrc
-[compton]=~/.config/compton.conf
-[rofi]=~/.config/rofi/config.rasi
-[polybar]=~/.config/polybar/config
-[ranger]=~/.config/ranger/rc.conf
-[dunst]=~/.config/dunst/dunstrc
-[newsboat urls]=~/.config/newsboat/urls
-
+	[profile]=~/.profile
+	[alacritty]=~/.config/alacritty/alacritty.yml
+	[bmfiles]=~/.config/bmfiles
+	[bmdirs]=~/.config/bmdirs
+	[bash]=~/.bashrc
+	[aliases]=~/.config/aliasrc
+	[zsh]=~/.zshrc
+	[nvim]=~/.config/nvim/init.vim
+	[i3]=~/.config/i3/config
+	[Xresources]=~/.Xresources
+	[colors]=~/.config/rice/colors
+	[i3blocks]=~/.config/i3blocks/config
+	[keyboard shortcuts]=~/.config/sxhkd/sxhkdrc
+	[compton]=~/.config/compton.conf
+	[rofi]=~/.config/rofi/config.rasi
+	[polybar]=~/.config/polybar/config
+	[ranger]=~/.config/ranger/rc.conf
+	[lf]=~/.config/lf/lfrc
+	[dunst]=~/.config/dunst/dunstrc
+	[newsboat urls]=~/.config/newsboat/urls
 )
 
 config=$(for config in "${!configs[@]}"; do echo "$config"; done | dmenu -i -p "Select configuration")
 
-[[ ! -z ${configs[$config]} ]] && $EDITOR ${configs[$config]}
+[[ ! -z ${configs[$config]} ]] && $TERMINAL -e $EDITOR ${configs[$config]}
