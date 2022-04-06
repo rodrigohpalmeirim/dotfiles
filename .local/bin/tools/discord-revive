@@ -1,0 +1,1 @@
+while true; do discord; notify-send "Discord crashed"; done

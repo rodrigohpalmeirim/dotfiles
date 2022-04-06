@@ -1,0 +1,14 @@
+#!/bin/bash
+
+declare -A themes=(
+	[Nord]=nord
+	[Tokyo Night]=tokyo-night
+)
+
+theme=$(for theme in "${!themes[@]}"; do echo "$theme"; done | dmenu -i -p "Select theme")
+
+[[ -z ${themes[$theme]} ]] && exit 1
+
+sed -i "s/\#include \".config\/rice\/themes\/[^\"]*\"/\#include \".config\/rice\/themes\/${themes[$theme]}\"/" ~/.Xresources
+
+~/.config/rice/applyconfigs

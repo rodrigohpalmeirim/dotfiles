@@ -1,0 +1,3 @@
+#!/bin/sh
+url="${1:-$(xclip -out)}"
+youtube-dl -g -f best $url | xclip -selection clipboard

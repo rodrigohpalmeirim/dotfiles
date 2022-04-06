@@ -1,0 +1,5 @@
+#!/bin/sh
+
+count=$(cat /tmp/signal_unread_count)
+echo $(( ${count:-0} + 1 )) > /tmp/signal_unread_count
+polybar-msg hook signal 1
