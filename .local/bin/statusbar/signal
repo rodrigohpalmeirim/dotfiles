@@ -1,0 +1,7 @@
+#!/bin/sh
+
+file=/tmp/signal_unread_count
+
+printf ""
+[ -f "$file" ] && [ "$(cat $file)" -ge 1 ] && printf " $(cat $file)"
+printf "\n"

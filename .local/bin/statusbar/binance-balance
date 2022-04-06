@@ -1,0 +1,34 @@
+#!/bin/python3
+
+import json
+from binance.client import Client
+
+with open('/home/rodrigo/Projects/crypto-trading-bot/binance-keys.json') as file:
+    binance_keys = json.load(file)
+
+client = Client(binance_keys["api"], binance_keys["secret"])
+
+balances = client.get_account()["balances"]
+orders = client.get_open_orders()
+
+for o in orders:
+    balances.append({"asset": o["symbol"].replace("USDT", ""), "free": float(o["origQty"])})
+
+tickers = {}
+for t in client.get_all_tickers():
+    tickers[t["symbol"]] = float(t["price"])
+
+usdt = 0
+
+for b in balances:
+    asset, amount = b["asset"].replace("LD", ""), float(b["free"])
+    if float(amount):
+        if asset == "USDT":
+            usdt += amount
+        else:
+            usdt += amount * tickers[f"{asset}USDT"]
+
+
+eur = usdt / tickers[f"EURUSDT"]
+
+print(f"  €{'{:.2f}'.format(eur)}")

@@ -1,0 +1,39 @@
+#!/bin/python3
+
+import sys
+import requests
+
+if len(sys.argv) < 3 or not sys.argv[-2].isalpha() or not sys.argv[-1].replace("-", "").isalnum():
+    print(f"Usage: {sys.argv[0]} [-v] <symbol> <api-key>")
+    exit(1)
+
+symbol = sys.argv[-2]
+api_key = sys.argv[-1]
+
+url = f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
+headers = {'X-CMC_PRO_API_KEY': api_key, 'Accept': 'application/json'}
+parameters = {"symbol": symbol, "convert": "USD"}
+
+try:
+    json = requests.get(url, headers=headers, params=parameters).json()
+except:
+    sys.exit(1)
+
+quote = json["data"][symbol]["quote"]["USD"]
+
+if "-v" not in sys.argv:
+    price = round(quote["price"])
+    change_24h = round(quote["percent_change_24h"], 1)
+    print(f" ${price} ({change_24h}%)")
+else:
+    print(f"\
+Price: €{quote['price']}\n\
+1h change: {quote['percent_change_1h']}%\n\
+24h change: {quote['percent_change_24h']}%\n\
+7 days change: {quote['percent_change_7d']}%\n\
+30 days change: {quote['percent_change_30d']}%\n\
+90 days change: {quote['percent_change_90d']}%\n\
+24h volume: €{quote['volume_24h']}\n\
+Market cap: €{quote['market_cap']}\n\
+Last updated: {quote['last_updated'].replace('T', ' ')[:-5]}\
+")
