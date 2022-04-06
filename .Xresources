@@ -1,0 +1,5 @@
+*.font: Mononoki Nerd Font
+*.size: 13
+*.alpha: 0.99
+#include ".config/rice/themes/nord"
+Xft.dpi: 96
