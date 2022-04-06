@@ -2,7 +2,7 @@
   text-color: #D8DEE9;
   selected-text-color: #ECEFF4;
   background-color: #2E3440;
-  border-color: #3B4252; /* Separator */
+  border-color: #2E3440; /* Separator */
   selected-background-color: #434C5E;
   item-padding: 8px;
   width: 256px;

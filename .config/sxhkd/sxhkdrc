@@ -6,11 +6,13 @@ control + alt + l
 super + r
 	rofi -modi window,drun,run,ssh -show drun
 super + e
-	ddspawn ranger
+	ddspawn lfub
 super + c
 	ddspawn qalc
 super + shift + c
-	$TERMINAL -e configmenu
+	configmenu
+super + shift + t
+	thememenu
 #super + m
 #	ddlaunch caprine && echo 0 > /tmp/messenger_unread_count && pkill -RTMIN+13 i3blocks
 super + d
@@ -22,8 +24,7 @@ super + s
 super + shift + n
 	ddspawn newsboat >/dev/null; pkill -RTMIN+6 i3blocks
 super + shift + b
-	polybar-msg -p $(xdo pid -m -a polybar-main_eDP1) cmd toggle
-
+	polybar-msg -p $(xdo pid -m -a polybar-main_eDP1) cmd toggle && polybar-msg -p $(xdo pid -m -a polybar-tray_eDP1) cmd hide
 super + u
 	ddspawn $SHELL
 super + i
@@ -65,6 +66,8 @@ control + alt + q
 	xclip -out | qr > /tmp/qr.png && sxiv /tmp/qr.png
 control + alt + o
 	ocr
+control + alt + t
+	notify-send "$(trans -b "$(xclip -selection clipboard -o)")"
 
 # Functions
 super + grave

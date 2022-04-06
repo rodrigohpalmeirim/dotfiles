@@ -1,0 +1,59 @@
+#define black      #242933
+#define lightblack #2E3440
+#define darkgray   #3B4252
+#define gray       #434C5E
+#define lightgray  #4C566A
+#define darkwhite  #D8DEE9
+#define white      #E5E9F0
+#define lightwhite #ECEFF4
+#define cyan       #8FBCBB
+#define lightblue  #88C0D0
+#define blue       #81A1C1
+#define darkblue   #5E81AC
+#define red        #BF616A
+#define orange     #D08770
+#define yellow     #EBCB8B
+#define green      #A3BE8C
+#define magenta    #B48EAD
+
+wallpaper: .config/rice/wallpapers/snow-nord.png
+
+*.foreground: darkwhite
+*.background: lightblack
+
+! Terminal Colors
+!! Normal
+*.color0: lightblack
+*.color1: red
+*.color2: green
+*.color3: yellow
+*.color4: blue
+*.color5: magenta
+*.color6: cyan
+*.color7: darkwhite
+!! Bright
+*.color8: darkgray
+*.color9: red
+*.color10: green
+*.color11: yellow
+*.color12: lightblue
+*.color13: magenta
+*.color14: cyan
+*.color15: lightwhite
+
+! Progbar
+progbar.background: black
+progbar.color6: lightblue
+
+! Polybar
+polybar.background: #00000000
+polybar.color2: cyan
+polybar.color3: lightblue
+polybar.color4: magenta
+polybar.color5: blue
+
+! Visual Studio Code
+vscode.theme: Nord
+
+! Rofi
+rofi.color8: gray

@@ -1,0 +1,374 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+foreground = ${xrdb:polybar.foreground}
+
+background-0 = ${xrdb:polybar.background0}
+background-1 = ${xrdb:polybar.background1}
+background-2 = ${xrdb:polybar.background2}
+
+color-0 = ${xrdb:polybar.color0}
+color-1 = ${xrdb:polybar.color1}
+color-2 = ${xrdb:polybar.color2}
+color-3 = ${xrdb:polybar.color3}
+
+highlight = ${xrdb:polybar.highlight}
+alert = ${xrdb:polybar.alert}
+warning = ${xrdb:polybar.warning}
+complete = ${xrdb:polybar.complete}
+
+[bar/main]
+;monitor = ${env:MONITOR:DP1}
+width = 100%
+height = 28
+radius = 0.0
+fixed-center = true
+
+background = ${colors.background-0}
+foreground = ${colors.foreground}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 0
+module-margin-right = 0
+
+font-0 = Ubuntu:style=Bold:pixelsize=11;2
+font-1 = "Font Awesome 6 Free:pixelsize=11:style=Solid;2"
+font-2 = "Font Awesome 6 Brands:pixelsize=11;2"
+font-3 = "Material Design Icons Desktop:style=Regular:pixelsize=16;4"
+;font-3 = Fira Code:style=SemiBold:pixelsize=10;3
+font-4 = Iosevka Nerd Font:style=Medium:pixelsize=17;4
+font-5 = Mononoki Nerd Font:pixelsize=12;2
+;font-5 = "Weather Icons:pixelsize=10;4"
+
+modules-left = left_corner date space weather right_corner left_corner crypto space discord space signal space news right_corner
+modules-center = i3
+modules-right = tray empty left_corner alsa space battery space bluetooth space wlan right_corner left_corner cpu space temperature space memory space filesystem right_corner
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+override-redirect = false
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+enable-ipc = true
+
+[bar/tray]
+width = 300
+height = 28
+offset-x = 58%
+offset-y = 0
+background = ${colors.background-0}
+tray-position = right
+modules-right = empty
+override-redirect = true
+enable-ipc = true
+
+;=============
+
+[module/empty]
+type = custom/text
+content = " "
+
+[module/space]
+type = custom/text
+content = "  "
+content-background = ${colors.background-1}
+
+[module/left_corner]
+type = custom/text
+content = " "
+content-foreground = ${colors.background-1}
+
+[module/right_corner]
+type = custom/text
+content = "%{T5}%{T-} "
+content-foreground = ${colors.background-1}
+
+;=============
+
+[module/tray]
+type = custom/ipc
+hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd show && polybar-msg hook tray 2:}%{T6}%{T-}%{A}" &
+hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd hide && polybar-msg hook tray 1:}%{T6}%{T-}%{A}" &
+initial = 1
+format-foreground = ${colors.background-2}
+
+;=============
+
+[module/news]
+type = custom/script
+exec = news
+interval = 60
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
+click-left = ddspawn newsboat
+
+[module/discord]
+type = custom/ipc
+hook-0 = ${HOME}/.local/bin/statusbar/discord
+initial = 1
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
+click-left = ddlaunch discord && echo 0 > /tmp/discord_unread_count && polybar-msg hook discord 1
+
+[module/signal]
+type = custom/ipc
+hook-0 = ${HOME}/.local/bin/statusbar/signal
+initial = 1
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
+click-left = ddlaunch signal && echo 0 > /tmp/signal_unread_count && polybar-msg hook signal 1
+
+[module/bluetooth]
+type = custom/script
+exec = ${HOME}/.local/bin/statusbar/bluetooth
+interval = 10
+format-background = ${colors.background-1}
+
+format-foreground = ${colors.color-2}
+
+click-left = blueman-manager >/dev/null && pkill blueman-applet
+
+[module/crypto]
+type = custom/script
+exec = crypto-status BTC "$(cat ~/Documents/coinmarketcap-api-key.txt)"
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
+interval = 300
+
+[module/battery]
+type = internal/battery
+
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-charging =  %percentage%%
+label-full =  %percentage%%
+
+format-full-background = ${colors.background-1}
+format-full-foreground = ${colors.complete}
+format-charging-background = ${colors.background-1}
+format-charging-foreground = ${colors.color-2}
+format-discharging-background = ${colors.background-1}
+format-discharging-foreground = ${colors.color-2}
+
+ramp-capacity-0 = 
+ramp-capacity-0-foreground = ${colors.alert}
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+;ramp-capacity-4-foreground = ${colors.complete}
+
+[module/filesystem]
+type = internal/fs
+interval = 60
+mount-0 = /
+label-mounted = %{A1:gksu gparted:} %free%%{A}
+format-mounted-background = ${colors.background-1}
+format-mounted-foreground = ${colors.color-3}
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
+
+label-mode-padding = 0
+label-mode-foreground = #000
+label-mode-background = ${colors.highlight}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-foreground= ${colors.highlight}
+label-focused-padding = 0
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %icon%
+label-unfocused-foreground= ${colors.background-2}
+label-unfocused-padding = 0
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-foreground = ${self.label-unfocused-foreground}
+label-visible-padding = ${self.label-unfocused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %icon%
+;label-urgent-background = ${colors.alert}
+label-urgent-padding = 0
+
+ws-icon-0 = 1;󰎤
+ws-icon-1 = 2;󰎧
+ws-icon-2 = 3;󰎪
+ws-icon-3 = 4;󰎭
+ws-icon-4 = 5;󰎱
+ws-icon-5 = 6;󰎳
+ws-icon-6 = 7;󰎶
+ws-icon-7 = 8;󰎹
+ws-icon-8 = 9;󰎼
+ws-icon-9 = 10;󰎡
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix-foreground = ${colors.foreground-1-alt}
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-3}
+label = %{A1:$TERMINAL -e htop:} %percentage:2%%%{A}
+
+[module/memory]
+type = internal/memory
+interval = 5
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-3}
+label = %{A1:$TERMINAL -e htop:} %mb_used%%{A}
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 5
+
+format-connected-foreground = ${colors.color-2}
+format-disconnected-foreground = ${colors.color-2}
+
+format-connected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} <label-connected>%{A}%{A}%{A}
+format-connected-background = ${colors.background-1}
+format-disconnected-background = ${colors.background-1}
+label-connected = %signal%%
+
+format-disconnected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} %{A}%{A}%{A}
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-1-alt}
+
+[module/eth]
+type = internal/network
+interface = net0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-1-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-1-alt}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %b %d (%a) "
+;date-alt = ""
+
+time =  %H:%M
+;time-alt =  %H:%M
+
+#format-prefix = 
+format-prefix-foreground = ${colors.foreground-1-alt}
+;format-underline = #0a6cf5
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-0}
+
+label = "%{A1:ddspawn calcurse:}%date%%{A} %{A1:ddspawn clock:}%{A2:timer:}%time%%{A}%{A}"
+
+[module/weather]
+type = custom/script
+exec = weather
+exec-if = ping -c 1 wttr.in
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-0}
+click-left = $TERMINAL -e forecast
+;format-font = 6
+interval = 300
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = 🔇 muted
+label-muted-foreground = #666
+
+bar-volume-width = 10
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-1-alt}
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = %{A1:ddspawn pulsemixer > /dev/null:}%{A2:#alsa.toggle:}<ramp-volume> <label-volume>%{A}%{A}
+format-muted = %{A1:ddspawn pulsemixer > /dev/null:}%{A2:#alsa.toggle:}<label-muted>%{A}%{A}
+format-volume-background = ${colors.background-1}
+format-volume-foreground = ${colors.color-2}
+format-muted-background = ${colors.background-1}
+format-muted-foreground = ${colors.color-2}
+label-muted = 
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+base-temperature = 20
+warn-temperature = 70
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-3}
+format-warn-background = ${colors.background-1}
+
+format-warn-foreground = ${colors.alert}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-warn-foreground = ${colors.alert}
+
+interval = 2

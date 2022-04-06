@@ -17,34 +17,21 @@
 ;==========================================================
 
 [colors]
-background = #00000000
+foreground = ${xrdb:polybar.foreground}
 
-foreground-1 = #D8DEE9
-foreground-2 = #E5E9F0
-foreground-3 = #ECEFF4
+background-0 = ${xrdb:polybar.background}
+background-1 = ${xrdb:polybar.color0}
+background-2 = ${xrdb:polybar.color8}
 
-background-1 = #2E3440
-background-2 = #3B4252
-background-3 = #434C5E
-background-4 = #4C566A
+color-0 = ${xrdb:polybar.color2}
+color-1 = ${xrdb:polybar.color3}
+color-2 = ${xrdb:polybar.color4}
+color-3 = ${xrdb:polybar.color5}
 
-blue-1 = #8FBCBB
-blue-2 = #88C0D0
-blue-3 = #81A1C1
-blue-4 = #5E81AC
-
-red = #BF616A
-orange = #D08770
-yellow = #EBCB8B
-green = #A3BE8C
-purple = #B48EAD
-
-group-1 = ${colors.blue-1}
-group-2 = ${colors.blue-2}
-group-3 = ${colors.purple}
-group-4 = ${colors.blue-3}
-
-module-background = ${colors.background-2}
+highlight = ${xrdb:polybar.color12}
+alert = ${xrdb:polybar.color9}
+warning = ${xrdb:polybar.color11}
+complete = ${xrdb:polybar.10}
 
 [bar/main]
 ;monitor = ${env:MONITOR:DP1}
@@ -53,9 +40,8 @@ height = 28
 radius = 0.0
 fixed-center = true
 
-background = ${colors.background}
-foreground = ${colors.foreground-1}
-;foreground = #000
+background = ${colors.background-0}
+foreground = ${colors.foreground}
 
 padding-left = 0
 padding-right = 1
@@ -72,9 +58,9 @@ font-4 = Iosevka Nerd Font:style=Medium:pixelsize=17;4
 font-5 = Mononoki Nerd Font:pixelsize=12;2
 ;font-5 = "Weather Icons:pixelsize=10;4"
 
-modules-left = left_corner date space weather right_corner left_corner crypto space discord space signal space news right_corner
+modules-left = alt_space date alt_space weather alt_space alt_right_corner space discord space signal space news space right_corner
 modules-center = i3
-modules-right = tray empty left_corner alsa space battery space bluetooth space wlan right_corner left_corner cpu space temperature space memory space filesystem right_corner
+modules-right = tray empty left_corner space alsa space battery space bluetooth space wlan space alt_left_corner alt_space cpu alt_space temperature alt_space memory alt_space filesystem alt_space
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -91,7 +77,7 @@ width = 300
 height = 28
 offset-x = 59%
 offset-y = 0
-background = ${colors.background}
+background = ${colors.background-0}
 tray-position = right
 modules-right = empty
 override-redirect = true
@@ -106,17 +92,34 @@ content = " "
 [module/space]
 type = custom/text
 content = "  "
-content-background = ${colors.module-background}
+content-background = ${colors.background-1}
+
+[module/alt_space]
+type = custom/text
+content = "  "
+content-background = ${colors.background-2}
 
 [module/left_corner]
 type = custom/text
-content = " "
-content-foreground = ${colors.module-background}
+content = " "
+content-foreground = ${colors.background-1}
+
+[module/alt_left_corner]
+type = custom/text
+content = " "
+content-background = ${colors.background-1}
+content-foreground = ${colors.background-2}
 
 [module/right_corner]
 type = custom/text
-content = "%{T5}%{T-} "
-content-foreground = ${colors.module-background}
+content = "%{T5}%{T-} "
+content-foreground = ${colors.background-1}
+
+[module/alt_right_corner]
+type = custom/text
+content = "%{T5}%{T-} "
+content-background = ${colors.background-1}
+content-foreground = ${colors.background-2}
 
 ;=============
 
@@ -125,7 +128,7 @@ type = custom/ipc
 hook-0 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd show && polybar-msg hook tray 2:}%{T6}%{T-}%{A}" &
 hook-1 = echo "%{A1:polybar-msg -p $(xdo pid -a polybar-tray_eDP1) cmd hide && polybar-msg hook tray 1:}%{T6}%{T-}%{A}" &
 initial = 1
-format-foreground = ${colors.background-4}
+format-foreground = ${colors.background-2}
 
 ;=============
 
@@ -133,41 +136,41 @@ format-foreground = ${colors.background-4}
 type = custom/script
 exec = news
 interval = 60
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-2}
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
 click-left = ddspawn newsboat
 
 [module/discord]
 type = custom/ipc
 hook-0 = ${HOME}/.local/bin/statusbar/discord
 initial = 1
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-2}
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
 click-left = ddlaunch discord && echo 0 > /tmp/discord_unread_count && polybar-msg hook discord 1
 
 [module/signal]
 type = custom/ipc
 hook-0 = ${HOME}/.local/bin/statusbar/signal
 initial = 1
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-2}
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
 click-left = ddlaunch signal && echo 0 > /tmp/signal_unread_count && polybar-msg hook signal 1
 
 [module/bluetooth]
 type = custom/script
 exec = ${HOME}/.local/bin/statusbar/bluetooth
 interval = 10
-format-background = ${colors.module-background}
+format-background = ${colors.background-1}
 
-format-foreground = ${colors.group-3}
+format-foreground = ${colors.color-2}
 
 click-left = blueman-manager >/dev/null && pkill blueman-applet
 
 [module/crypto]
 type = custom/script
 exec = crypto-status BTC "$(cat ~/Documents/coinmarketcap-api-key.txt)"
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-2}
+format-background = ${colors.background-1}
+format-foreground = ${colors.color-1}
 interval = 300
 
 [module/battery]
@@ -178,72 +181,28 @@ format-discharging = <ramp-capacity> <label-discharging>
 label-charging =  %percentage%%
 label-full =  %percentage%%
 
-format-full-background = ${colors.module-background}
-format-full-foreground = ${colors.green}
-format-charging-background = ${colors.module-background}
-format-charging-foreground = ${colors.group-3}
-format-discharging-background = ${colors.module-background}
-format-discharging-foreground = ${colors.group-3}
+format-full-background = ${colors.background-1}
+format-full-foreground = ${colors.complete}
+format-charging-background = ${colors.background-1}
+format-charging-foreground = ${colors.color-2}
+format-discharging-background = ${colors.background-1}
+format-discharging-foreground = ${colors.color-2}
 
 ramp-capacity-0 = 
-ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-0-foreground = ${colors.alert}
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-;ramp-capacity-4-foreground = ${colors.green}
-
-;=============
-
-[module/xwindow]
-type = internal/xwindow
-label = %title:0:30:...%
-
-[module/xkeyboard]
-type = internal/xkeyboard
-blacklist-0 = num lock
-
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-1-alt}
-format-prefix-underline = ${blue-3}
-
-label-layout = %layout%
-label-layout-underline = ${blue-3}
-
-label-indicator-padding = 2
-label-indicator-margin = 1
-label-indicator-background = ${blue-3}
-label-indicator-underline = ${blue-3}
+;ramp-capacity-4-foreground = ${colors.complete}
 
 [module/filesystem]
 type = internal/fs
 interval = 60
 mount-0 = /
 label-mounted = %{A1:gksu gparted:} %free%%{A}
-format-mounted-background = ${colors.module-background}
-format-mounted-foreground = ${colors.group-4}
-
-;[module/bspwm]
-;type = internal/bspwm
-;
-;label-focused = %index%
-;label-focused-background = ${colors.background-alt}
-;label-focused-underline= ${colors.blue-2}
-;label-focused-padding = 2
-;
-;label-occupied = %index%
-;label-occupied-padding = 2
-;
-;label-urgent = %index%!
-;label-urgent-background = ${colors.red}
-;label-urgent-padding = 2
-;
-;label-empty = %index%
-;label-empty-foreground = ${colors.foreground-1-alt}
-;label-empty-padding = 2
-;
-; Separator in between workspaces
-; label-separator = |
+format-mounted-background = ${colors.background-2}
+format-mounted-foreground = ${colors.color-3}
 
 [module/i3]
 type = internal/i3
@@ -256,16 +215,16 @@ wrapping-scroll = false
 
 label-mode-padding = 0
 label-mode-foreground = #000
-label-mode-background = ${colors.blue-2}
+label-mode-background = ${colors.highlight}
 
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
-label-focused-foreground= ${colors.blue-2}
+label-focused-foreground= ${colors.highlight}
 label-focused-padding = 0
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
-label-unfocused-foreground= ${colors.background-4}
+label-unfocused-foreground= ${colors.background-2}
 label-unfocused-padding = 0
 
 ; visible = Active workspace on unfocused monitor
@@ -275,7 +234,7 @@ label-visible-padding = ${self.label-unfocused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %icon%
-;label-urgent-background = ${colors.red}
+;label-urgent-background = ${colors.alert}
 label-urgent-padding = 0
 
 ws-icon-0 = 1;󰎤
@@ -289,58 +248,19 @@ ws-icon-7 = 8;󰎹
 ws-icon-8 = 9;󰎼
 ws-icon-9 = 10;󰎡
 
-; Separator in between workspaces
-; label-separator = |
-
-
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #fff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-1-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix-foreground = ${colors.foreground-1-alt}
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-4}
+format-background = ${colors.background-2}
+format-foreground = ${colors.color-3}
 label = %{A1:$TERMINAL -e htop:} %percentage:2%%%{A}
 
 [module/memory]
 type = internal/memory
 interval = 5
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-4}
+format-background = ${colors.background-2}
+format-foreground = ${colors.color-3}
 label = %{A1:$TERMINAL -e htop:} %mb_used%%{A}
 
 [module/wlan]
@@ -348,12 +268,12 @@ type = internal/network
 interface = wlp2s0
 interval = 5
 
-format-connected-foreground = ${colors.group-3}
-format-disconnected-foreground = ${colors.group-3}
+format-connected-foreground = ${colors.color-2}
+format-disconnected-foreground = ${colors.color-2}
 
 format-connected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} <label-connected>%{A}%{A}%{A}
-format-connected-background = ${colors.module-background}
-format-disconnected-background = ${colors.module-background}
+format-connected-background = ${colors.background-1}
+format-disconnected-background = ${colors.background-1}
 label-connected = %signal%%
 
 format-disconnected = %{A1:setsid "$TERMINAL" -e nmtui:}%{A2:$TERMINAL -e speedometer -r wlp2s0 -t wlp2s0:}%{A3:nm-connection-editor:} %{A}%{A}%{A}
@@ -390,8 +310,8 @@ time =  %H:%M
 #format-prefix = 
 format-prefix-foreground = ${colors.foreground-1-alt}
 ;format-underline = #0a6cf5
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-1}
+format-background = ${colors.background-2}
+format-foreground = ${colors.color-0}
 
 label = "%{A1:ddspawn calcurse:}%date%%{A} %{A1:ddspawn clock:}%{A2:timer:}%time%%{A}%{A}"
 
@@ -399,8 +319,8 @@ label = "%{A1:ddspawn calcurse:}%date%%{A} %{A1:ddspawn clock:}%{A2:timer:}%time
 type = custom/script
 exec = weather
 exec-if = ping -c 1 wttr.in
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-1}
+format-background = ${colors.background-2}
+format-foreground = ${colors.color-0}
 click-left = $TERMINAL -e forecast
 ;format-font = 6
 interval = 300
@@ -437,10 +357,10 @@ type = internal/alsa
 
 format-volume = %{A1:ddspawn pulsemixer > /dev/null:}%{A2:#alsa.toggle:}<ramp-volume> <label-volume>%{A}%{A}
 format-muted = %{A1:ddspawn pulsemixer > /dev/null:}%{A2:#alsa.toggle:}<label-muted>%{A}%{A}
-format-volume-background = ${colors.module-background}
-format-volume-foreground = ${colors.group-3}
-format-muted-background = ${colors.module-background}
-format-muted-foreground = ${colors.group-3}
+format-volume-background = ${colors.background-1}
+format-volume-foreground = ${colors.color-2}
+format-muted-background = ${colors.background-1}
+format-muted-foreground = ${colors.color-2}
 label-muted = 
 
 ramp-volume-0 = 
@@ -455,60 +375,17 @@ warn-temperature = 70
 
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
-format-background = ${colors.module-background}
-format-foreground = ${colors.group-4}
-format-warn-background = ${colors.module-background}
+format-background = ${colors.background-2}
+format-foreground = ${colors.color-3}
+format-warn-background = ${colors.background-2}
 
-format-warn-foreground = ${colors.red}
+format-warn-foreground = ${colors.alert}
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 ramp-3 = 
 ramp-4 = 
-ramp-warn-foreground = ${colors.red}
+ramp-warn-foreground = ${colors.alert}
 
 interval = 2
-
-[module/powermenu]
-type = custom/menu
-
-expand-right = true
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${blue-3}
-label-close =  cancel
-label-close-foreground = ${blue-3}
-label-separator = |
-label-separator-foreground = ${colors.foreground-1-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
-; vim:ft=dosini
