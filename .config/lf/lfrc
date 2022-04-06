@@ -82,8 +82,8 @@ map <enter> shell
 map x $$f
 map X !$f
 map o $mimeopen --ask $f
-map D &dragon-drag-and-drop $fx
-map U $[[ $(file $fx) =~ "ASCII" ]] && cat $fx | nc termbin.com 9999 | xclip -selection clipboard || ffsend upload $fx --copy
+map D &dragon-drop $fx
+map U $file $fx |grep -e "Unicode\|ASCII\|UTF-8\|text" -o && cat $fx | nc termbin.com 9999 |tr -d '\n\0'| xclip -selection clipboard || ffsend upload $fx --copy
 
 map d
 map dd cut

@@ -1,0 +1,94 @@
+{
+  "main": {
+    "id": "5356cdba2115e02d",
+    "type": "split",
+    "children": [
+      {
+        "id": "3e9efefc083fd764",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "28a90450cadd6fec",
+    "type": "split",
+    "children": [
+      {
+        "id": "2cfb1579afc3d512",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9b5c7aea951a1ad2",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "4936b37d5200a9fd",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "c9048199b72be4e1",
+    "type": "split",
+    "children": [
+      {
+        "id": "fb7eac51ec754c1d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ab7729ab75c42e4f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "3e9efefc083fd764",
+  "lastOpenFiles": [
+    "How to/Basic note taking.md",
+    "Start here.md",
+    "Obsidian/Index.md",
+    "Customization/Custom hotkeys.md",
+    "Customization/Appearance.md",
+    "Plugins/Core plugins.md"
+  ]
+}

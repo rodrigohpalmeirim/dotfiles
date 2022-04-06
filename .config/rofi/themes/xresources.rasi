@@ -1,0 +1,41 @@
+* {
+  text-color: #D8DEE9;
+  selected-text-color: #ECEFF4;
+  background-color: #2E3440;
+  border-color: #2E3440; /* Separator */
+  selected-background-color: #434C5E;
+  item-padding: 12px;
+  width: 512px;
+  spacing: 0;
+}
+
+inputbar {
+  border: 0 0 1px 0;
+  children: [prompt,entry];
+}
+
+prompt {
+  padding: @item-padding;
+  border: 0 1px 0 0;
+}
+
+entry {
+  padding: @item-padding;
+}
+
+listview {
+  cycle: false;
+  margin: 0 0 -1px 0;
+  scrollbar: false;
+  lines: 7;
+}
+
+element {
+  border: 0 0 1px 0;
+  padding: @item-padding;
+}
+
+element selected, element-text selected {
+  background-color: @selected-background-color;
+  text-color: @selected-text-color;
+}

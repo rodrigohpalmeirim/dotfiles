@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# Reload Xresources
+xrdb -I$HOME ~/.Xresources
+
+# Set background
+xwallpaper --zoom $(xrdb -g wallpaper)
+
+# Polybar
+polybar-msg cmd restart
+
+# Visual Studio Code
+sed -i "
+	s/\"workbench.colorTheme\":[^,]*/\"workbench.colorTheme\": \"$(xrdb -g vscode.theme)\"/;
+	s/\"editor.fontFamily\":[^,]*/\"editor.fontFamily\": \"$(xrdb -g vscode.font)\"/;
+" ~/.config/Code/User/settings.json
+
+# Rofi
+sed -i "
+	s/text-color: [^@][^;]*/text-color: $(xrdb -g rofi.foreground)/;
+	s/selected-text-color: [^@][^;]*/selected-text-color: $(xrdb -g rofi.color15)/;
+	s/background-color: [^@][^;]*/background-color: $(xrdb -g rofi.background)/;
+	s/border-color: [^@][^;]*/border-color: $(xrdb -g rofi.color0)/;
+	s/selected-background-color: [^@][^;]*/selected-background-color: $(xrdb -g rofi.color8)/;
+" ~/.config/rofi/themes/xresources.rasi ~/.config/rofi/themes/prompt.rasi ~/.config/rofi/themes/screenshot.rasi
+
+# Reload nvim
+touch /tmp/nvim-reload
+
+# Alacritty
+echo "\
+# this file is being written by ~/.config/rice/applyconfigs
+env:
+  TERM: xterm-256color
+window:
+  dimensions:
+    columns: 90
+    lines: 27
+  opacity: $(xrdb -g alacritty.alpha)
+font:
+  normal:
+    family: $(xrdb -g alacritty.font)
+  size: $(xrdb -g alacritty.size)
+colors:
+  primary:
+    background: '$(xrdb -g alacritty.background)'
+    foreground: '$(xrdb -g alacritty.foreground)'
+    dim_foreground: '$(xrdb -g alacritty.color8)'
+    bright_foreground: '$(xrdb -g alacritty.color15)'
+  normal:
+    black: '$(xrdb -g alacritty.color0)'
+    red: '$(xrdb -g alacritty.color1)'
+    green: '$(xrdb -g alacritty.color2)'
+    yellow: '$(xrdb -g alacritty.color3)'
+    blue: '$(xrdb -g alacritty.color4)'
+    magenta: '$(xrdb -g alacritty.color5)'
+    cyan: '$(xrdb -g alacritty.color6)'
+    white: '$(xrdb -g alacritty.color7)'
+  bright:
+    black: '$(xrdb -g alacritty.color8)'
+    red: '$(xrdb -g alacritty.color9)'
+    green: '$(xrdb -g alacritty.color10)'
+    yellow: '$(xrdb -g alacritty.color11)'
+    blue: '$(xrdb -g alacritty.color12)'
+    magenta: '$(xrdb -g alacritty.color13)'
+    cyan: '$(xrdb -g alacritty.color14)'
+    white: '$(xrdb -g alacritty.color15)'\
+" > ~/.config/alacritty/alacritty.yml

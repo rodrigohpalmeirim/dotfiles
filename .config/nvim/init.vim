@@ -14,11 +14,12 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'jreybert/vimagit'
 Plug 'LukeSmithxyz/vimling'
 Plug 'vimwiki/vimwiki'
-Plug 'bling/vim-airline'
 Plug 'tpope/vim-commentary'
 Plug 'vifm/vifm.vim'
 Plug 'kovetskiy/sxhkd-vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'nekonako/xresources-nvim'
+Plug 'rktjmp/fwatch.nvim'
 Plug 'ap/vim-css-color'
 call plug#end()
 
@@ -110,8 +111,8 @@ set termguicolors
 " Restart polybar when config is updated.
 	autocmd BufWritePost ~/.config/polybar/config !polybar-msg cmd restart
 
-" Run xrdb whenever Xdefaults or Xresources are updated.
-	autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+" Apply configs whenever Xresources are updated.
+	autocmd BufWritePost *Xresources,~/.config/rice/* !~/.config/rice/applyconfigs
 
 " Navigating with guides
 	inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
@@ -232,4 +233,8 @@ set termguicolors
 
 command W :execute ':silent w !sudo tee % >/dev/null' |:edit!
 
-colorscheme nord
+
+lua fwatch = require('fwatch')
+lua fwatch.watch("/tmp/nvim-reload", "source ~/.config/nvim/plugged/xresources-nvim/lua/xresources.lua")
+
+colorscheme xresources

@@ -1,0 +1,62 @@
+! https://marketplace.visualstudio.com/items?itemName=enkia.tokyo-night
+
+#define red        #f7768e
+#define magenta    #f776c6
+#define orange     #ff9e64
+#define yellow     #e0af68
+#define green      #9ece6a
+#define aqua       #73daca
+#define lightaqua  #b4f9f8
+#define turquoise  #2ac3de
+#define lightblue  #7dcfff
+#define blue       #7aa2f7
+#define purple     #bb9af7
+#define white      #c0caf5
+#define darkwhite  #a9b1d6
+#define lightgray  #9aa5ce
+#define beige      #cfc9c2
+#define gray       #565f89
+#define darkgray   #414868
+#define lightblack #24283b
+#define black      #1a1b26
+#define darkblack  #16161E
+
+wallpaper: .config/rice/wallpapers/girl-pink.jpg
+
+*.foreground: darkwhite
+*.background: black
+
+! Terminal Colors
+!! Normal
+*.color0: black
+*.color1: red
+*.color2: aqua
+*.color3: yellow
+*.color4: blue
+*.color5: purple
+*.color6: lightblue
+*.color7: darkwhite
+!! Bright
+*.color8: lightblack
+*.color9: red
+*.color10: green
+*.color11: yellow
+*.color12: blue
+*.color13: purple
+*.color14: lightblue
+*.color15: white
+
+! Progbar
+progbar.background: darkblack
+
+! Polybar
+polybar.background: darkblack
+polybar.color2: magenta
+polybar.color3: purple
+polybar.color4: blue
+polybar.color5: lightblue
+
+! Visual Studio Code
+vscode.theme: Tokyo Night
+
+! Rofi
