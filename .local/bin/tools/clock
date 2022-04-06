@@ -1,0 +1,2 @@
+#!/bin/sh
+tty-clock -scbC 4 -f %d-%m-%Y -a 30000000 -d 0

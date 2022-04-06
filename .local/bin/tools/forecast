@@ -1,0 +1,5 @@
+#!/bin/sh
+location=Leuvehaven # Leave empty for automatic detection
+forecast=$(curl -s wttr.in/$location)
+graph=$(curl -s v2d.wttr.in/$location)
+echo -e "$forecast\n$graph"| less
